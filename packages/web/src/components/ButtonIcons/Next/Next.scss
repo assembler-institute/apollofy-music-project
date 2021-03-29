@@ -1,0 +1,8 @@
+.Next:hover {
+  transform: scale(1.05);
+  transition: transform 400 ease-in;
+}
+
+.Next:focus {
+  outline: none;
+}
