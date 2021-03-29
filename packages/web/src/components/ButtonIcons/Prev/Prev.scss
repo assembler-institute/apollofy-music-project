@@ -1,0 +1,8 @@
+.Prev:hover {
+  transform: scale(1.05);
+  transition: transform 400 ease-in;
+}
+
+.Prev:focus {
+  outline: none;
+}
