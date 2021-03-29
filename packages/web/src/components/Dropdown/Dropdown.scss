@@ -1,0 +1,43 @@
+.Dropdown {
+  &__wrapper {
+    @apply focus:outline-none hover:bg-gray-600 rounded-full py-1 px-2 flex flex-row items-center justify-between;
+  }
+
+  &__leading {
+    @apply w-7 h-7 mr-2;
+  }
+
+  &__leading-icon {
+    @apply rounded-full;
+  }
+
+  &__title {
+    @apply ml-2 mr-2 overflow-ellipsis overflow-hidden whitespace-nowrap;
+    max-width: 110px;
+  }
+
+  &__trailing {
+  }
+
+  &__list {
+    margin-top: 8px;
+    border: 0px;
+    background-color: #282828;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 4px 4px;
+  }
+
+  &__item {
+    box-sizing: border-box;
+    padding: 5px 20px;
+    color: hsla(0, 0%, 100%, 0.7);
+  }
+
+  &__item:hover {
+    cursor: pointer;
+    color: white !important;
+    background-color: hsla(0, 0%, 100%, 0.1) !important;
+  }
+}
