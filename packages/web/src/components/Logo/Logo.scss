@@ -1,0 +1,7 @@
+.Logo {
+  @apply block p-2 pl-4 mb-2 flex-1 text-gray-300 hover:text-white text-sm font-bold;
+
+  &--active {
+    @apply bg-gray-800;
+  }
+}
