@@ -1,0 +1,51 @@
+.Card {
+  @apply relative rounded-md h-full p-4 box-border bg-gray-800 hover:bg-gray-700 cursor-pointer transition-colors duration-300  focus:outline-none ease-out;
+  isolation: isolate;
+
+  &__wrapper {
+    @apply flex flex-col w-full h-full;
+  }
+
+  &__overlap {
+    @apply relative top-0 bottom-0 right-0 left-0 z-0 whitespace-nowrap;
+  }
+
+  &__header {
+    @apply relative flex-grow-0 flex-shrink w-full mb-4 z-10;
+  }
+
+  &__title {
+    @apply font-bold text-lg whitespace-nowrap overflow-hidden overflow-ellipsis;
+  }
+
+  &__content {
+    @apply flex-grow-0 flex-shrink box-border block z-10;
+  }
+
+  &__img-wrapper {
+    @apply w-full h-full relative block;
+    padding-bottom: 100%;
+  }
+
+  &__img {
+    @apply w-full h-full object-cover absolute top-0 left-0;
+  }
+
+  &__btn-wrapper {
+    @apply absolute bottom-2 right-2 focus:outline-none z-20;
+    position: absolute;
+    display: none;
+    opacity: 0;
+  }
+}
+
+@media (pointer: fine) {
+  .Card:hover {
+    &__btn-wrapper {
+      display: block;
+      position: absolute;
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
