@@ -1,0 +1,23 @@
+.Alert {
+  @apply rounded-md max-w-7xl mx-auto my-2 py-1 px-1 sm:px-2 lg:px-4;
+
+  &__wrapper {
+    @apply mx-1 flex items-center justify-start flex-wrap;
+  }
+
+  &__leading {
+    @apply flex items-center;
+  }
+
+  &__content {
+    @apply w-0 order-2 flex-1 items-center;
+  }
+
+  &__title {
+    @apply font-medium text-white truncate;
+  }
+
+  &__trailing {
+    @apply order-3 flex-shrink-0 sm:order-3 sm:ml-3;
+  }
+}
