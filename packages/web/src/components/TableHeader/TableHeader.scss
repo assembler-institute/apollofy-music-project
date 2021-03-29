@@ -1,0 +1,51 @@
+.Header {
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+
+  &__Wrapper {
+    @apply relative pl-4 pr-4 rounded-sm border-4 border-solid border-transparent;
+    display: grid;
+    height: 56px;
+    grid-gap: 16px;
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+  }
+
+  &__Leading {
+    @apply relative flex items-center justify-center w-full h-full;
+    grid-column: leading;
+  }
+
+  &__Title {
+    @apply relative flex items-center;
+    grid-column: title;
+  }
+
+  &__Trailing {
+    @apply relative flex items-center text-base;
+    grid-column: trailing;
+  }
+
+  &__Param1 {
+    @apply relative flex items-center text-base;
+    grid-column: param1;
+  }
+
+  &__Param2 {
+    @apply relative flex items-center text-base;
+    grid-column: param2;
+  }
+}
+
+.SimpleGrid {
+  grid-template-columns: [leading] 48px [title] 6fr [trailing] minmax(
+      120px,
+      1fr
+    );
+}
+
+.ExpandedGrid {
+  grid-template-columns: [leading] 48px [title] 6fr [param1] 4fr [param2] 3fr [trailing] minmax(
+      120px,
+      1fr
+    );
+}
