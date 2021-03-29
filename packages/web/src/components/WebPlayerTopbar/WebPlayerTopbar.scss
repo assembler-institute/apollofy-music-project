@@ -1,0 +1,57 @@
+.WebPlayerTopbar {
+  @apply relative z-20;
+  height: 60px;
+  max-width: calc(100vw - var(--nav-bar-width));
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &__wrapper {
+    @apply relative flex w-full h-full items-center justify-between;
+    padding: 16px 32px;
+    padding-inline-end: 32px;
+  }
+
+  &__controls {
+    @apply flex flex-row items-center justify-between;
+  }
+
+  &__content {
+    @apply ml-2 flex-1 whitespace-nowrap;
+  }
+
+  &__content-wrapper {
+    @apply w-full ml-2 whitespace-nowrap;
+  }
+
+  &__content-list {
+    @apply w-full flex flex-row items-center whitespace-nowrap;
+  }
+
+  &__content-item {
+    @apply mx-2 inline-block;
+  }
+
+  &__content-item > a {
+    @apply font-bold py-2 px-3 rounded text-white text-center;
+  }
+
+  &__content-item--selected > a {
+    background-color: #333;
+  }
+
+  &__search {
+    @apply relative flex;
+  }
+
+  &__search > div {
+    flex: 0 1 300px;
+    -webkit-box-flex: 0;
+  }
+
+  &__access {
+    @apply flex items-center;
+  }
+
+  &__options {
+    @apply flex items-center;
+  }
+}
