@@ -1,0 +1,31 @@
+$minimumColumnWidth: 180px;
+
+.CardPanel {
+  @apply w-full rounded-md flex flex-col p-4 box-border;
+  min-height: 300px;
+
+  &__wrapper {
+    @apply block w-full h-full;
+  }
+
+  &__header {
+    @apply w-full h-auto mb-6 flex flex-col;
+    grid-column: 1/-1;
+  }
+
+  &__title {
+    @apply font-bold text-lg whitespace-nowrap hover:underline overflow-hidden overflow-ellipsis;
+  }
+
+  &__btn {
+    @apply flex-grow-0 no-underline uppercase font-bold hover:underline;
+  }
+
+  &__content {
+    @apply box-border grid grid-rows-1 overflow-hidden;
+    grid-column-gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax($minimumColumnWidth, 1fr));
+    grid-auto-rows: 0;
+    overflow-y: hidden;
+  }
+}
