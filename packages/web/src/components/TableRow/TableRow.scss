@@ -1,0 +1,100 @@
+.TableRow {
+  @apply relative box-border;
+
+  &__Wrapper {
+    @apply relative grid pl-4 pr-4 rounded-sm border-4 border-solid border-transparent;
+    height: 56px;
+    grid-gap: 16px;
+  }
+
+  &__Wrapper:hover {
+    background-color: hsla(0, 0%, 100%, 0.1);
+  }
+
+  &__Leading {
+    @apply relative flex items-center justify-self-center w-full h-full;
+    grid-column: leading;
+  }
+
+  &__Title {
+    @apply relative flex items-center;
+    grid-column: title;
+  }
+
+  &__Trailing {
+    @apply relative flex items-center;
+    grid-column: trailing;
+  }
+}
+
+.Leading {
+  &__Wrapper {
+    @apply relative inline-block flex items-center justify-center;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__Index {
+    @apply text-base text-gray-500;
+  }
+
+  &__BtnWrapper {
+    @apply absolute flex justify-center opacity-0 transition ease-in duration-75;
+  }
+}
+
+.Title {
+  &__ImgWrapper {
+    @apply flex-shrink-0 h-10 w-10;
+  }
+
+  &__Img {
+    @apply h-10 w-10 rounded-sm;
+  }
+}
+
+.Trailing {
+  &__Left {
+    @apply opacity-0 mr-4 transition ease-in-out duration-75;
+  }
+
+  &__Right {
+    @apply opacity-0 ml-4 transition ease-in-out duration-75;
+  }
+}
+
+.TableRow:hover {
+  .Leading {
+    &__BtnWrapper {
+      @apply opacity-100;
+    }
+  }
+
+  .Trailing {
+    &__Left {
+      @apply opacity-100;
+    }
+
+    &__Right {
+      @apply opacity-100;
+    }
+  }
+}
+
+.TableRow:focus {
+  outline: none;
+}
+
+.SimpleGrid {
+  grid-template-columns: [leading] 48px [title] 6fr [trailing] minmax(
+      120px,
+      1fr
+    );
+}
+
+.ExpandedGrid {
+  grid-template-columns: [leading] 48px [title] 6fr [param1] 4fr [param2] 3fr [trailing] minmax(
+      120px,
+      1fr
+    );
+}
