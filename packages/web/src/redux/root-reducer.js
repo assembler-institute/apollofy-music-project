@@ -6,6 +6,7 @@ import PlaylistReducer from "./playlist/playlist-reducer";
 import SearchReducer from "./search/search-reducer";
 import TrackReducer from "./track/track-reducer";
 import SessionReducer from "./session/session-reducer";
+import UploaderReducer from "./uploader/uploader-reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   playlists: PlaylistReducer,
   search: SearchReducer,
   session: SessionReducer,
+  uploader: UploaderReducer,
 });
 
 export default rootReducer;
