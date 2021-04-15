@@ -55,3 +55,30 @@ export function uploadSong({
       });
   };
 }
+
+export function uploadImage({
+  file,
+  name = "",
+  genres = [],
+  onUploadProgress = (_) => {},
+}) {
+  return async function uploadImageThunk(dispatch) {
+    dispatch(uploadImageRequest());
+
+    getFileUrl({
+      file: file,
+      fileType: fileTypes.IMAGE,
+      onUploadProgress: onUploadProgress,
+    })
+      .then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res.data.url);
+        dispatch(uploadImageSuccess(res.data.url));
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+        dispatch(uploadImageError(err));
+      });
+  };
+}
