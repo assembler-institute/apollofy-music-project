@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import ResetPassword from "./pages/ResetPassword";
+import UploadSong from "./pages/UploadSong";
 
 import { onAuthStateChanged } from "./services/auth";
 import { syncSignIn, signOut } from "./redux/auth/auth-actions";
@@ -39,6 +40,7 @@ function App() {
       <Switch>
         <Route path={ROUTES.SIGN_UP} component={SignUp} />
         <Route path={ROUTES.LOGIN} component={Login} />
+        <Route path={ROUTES.UPLOAD_SONG} component={UploadSong} />
         <Route path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
         <Route path={ROUTES.HOME} component={Home} exact />
       </Switch>
