@@ -7,6 +7,7 @@ import "./UploadSong.scss";
 
 import { uploadSong } from "../../redux/uploader/uploader-actions";
 import { uploaderSelector } from "../../redux/uploader/uploader-selectors";
+import { fileTypes } from "../../services/cloudinary";
 
 function UploadSong() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function UploadSong() {
       <div className="h-full w-full flex flex-col justify-center items-center">
         <h4>Upload Audio File</h4>
         <Dropzone
+          fileType={fileTypes.AUDIO}
           onFileSelected={(files) => {
             // eslint-disable-next-line no-console
             handleSongUpload(files[0]);
