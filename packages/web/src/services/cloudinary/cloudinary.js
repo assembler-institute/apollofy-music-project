@@ -1,15 +1,26 @@
 import axios from "axios";
 
-export const getFileUrl = ({ file, onUploadProgress }) => {
-  const unsignedUploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+export const fileTypes = {
+  AUDIO: "audio",
+  IMAGE: "image",
+};
+
+export const getFileUrl = ({ file, fileType, onUploadProgress }) => {
+  const songUploadPreset = process.env.REACT_APP_CLOUDINARY_SONG_UPLOAD_PRESET;
+  const imageUploadPreset =
+    process.env.REACT_APP_CLOUDINARY_IMAGE_UPLOAD_PRESET;
   const unsignedCloudName = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 
   const url = `https://api.cloudinary.com/v1_1/${unsignedCloudName}/upload`;
 
   const fd = new FormData();
-  fd.append("upload_preset", unsignedUploadPreset);
+  fileType === fileTypes.AUDIO
+    ? fd.append("upload_preset", songUploadPreset)
+    : fd.append("upload_preset", imageUploadPreset);
   fd.append("file", file);
-  fd.append("resource_type", "video");
+  fileType === fileTypes.AUDIO
+    ? fd.append("resource_type", "video")
+    : fd.append("resource_type", "image");
   fd.append("public_id", file.name);
   fd.append("tags", "browser_upload"); // Optional - add tag for image admin in Cloudinary
 
