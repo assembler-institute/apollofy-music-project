@@ -1,8 +1,8 @@
-const { config } = require("../config");
+const { logger } = require("../services");
 
 function errorMiddleware(err, req, res, next) {
-  config.logger.debug("Error Handler Middleware: ");
-  config.logger.error(err);
+  logger.debug("Error Handler Middleware: ");
+  logger.error(err);
 
   if (req.headersSent) {
     // When you add a custom error handler,

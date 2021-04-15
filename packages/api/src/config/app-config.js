@@ -1,7 +1,5 @@
 require("dotenv").config();
 
-const { logger } = require("../services");
-
 const {
   NODE_ENV = "development",
   MONGO_DB_URL_PRODUCTION,
@@ -16,13 +14,6 @@ const baseConfig = {
   },
   client: {
     url: process.env.CLIENT_URL || "http://localhost:3000",
-  },
-  logger: {
-    warn: logger.warn,
-    info: logger.info,
-    error: logger.error,
-    trace: logger.trace,
-    debug: logger.debug,
   },
 };
 
