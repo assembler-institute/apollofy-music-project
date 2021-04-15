@@ -37,5 +37,5 @@ jobs:
           }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
       - name: Deploy backend to Heroku
         run:
-          git push heroku-api `git subtree split --prefix packages/api
+          git push heroku-api `git subtree split --prefix packages/api -b
           main`:refs/heads/main --force
