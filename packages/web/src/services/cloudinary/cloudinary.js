@@ -13,16 +13,16 @@ export const getFileUrl = ({ file, fileType, onUploadProgress }) => {
 
   const url = `https://api.cloudinary.com/v1_1/${unsignedCloudName}/upload`;
 
-  const fd = new FormData();
+  const formData = new FormData();
   fileType === fileTypes.AUDIO
-    ? fd.append("upload_preset", songUploadPreset)
-    : fd.append("upload_preset", imageUploadPreset);
-  fd.append("file", file);
+    ? formData.append("upload_preset", songUploadPreset)
+    : formData.append("upload_preset", imageUploadPreset);
+  formData.append("file", file);
   fileType === fileTypes.AUDIO
-    ? fd.append("resource_type", "video")
-    : fd.append("resource_type", "image");
-  fd.append("public_id", file.name);
-  fd.append("tags", "browser_upload");
+    ? formData.append("resource_type", "video")
+    : formData.append("resource_type", "image");
+  formData.append("public_id", file.name);
+  formData.append("tags", "browser_upload");
 
   const config = {
     headers: {
@@ -33,5 +33,5 @@ export const getFileUrl = ({ file, fileType, onUploadProgress }) => {
     onUploadProgress: onUploadProgress,
   };
 
-  return axios.post(url, fd, config);
+  return axios.post(url, formData, config);
 };
