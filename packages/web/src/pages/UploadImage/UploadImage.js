@@ -38,8 +38,8 @@ function UploadImage() {
           }}
         />
         {isUploadingImage && <p>Uploading song...</p>}
-        {uploadImageSuccess && <p>Upload successful...</p>}
-        {uploadImageError && <p>Upload error...</p>}
+        {uploadImageSuccess && <p>Upload successful!</p>}
+        {uploadImageError && <p>Upload error!</p>}
       </div>
     </div>
   );

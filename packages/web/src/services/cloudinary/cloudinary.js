@@ -22,7 +22,7 @@ export const getFileUrl = ({ file, fileType, onUploadProgress }) => {
     ? fd.append("resource_type", "video")
     : fd.append("resource_type", "image");
   fd.append("public_id", file.name);
-  fd.append("tags", "browser_upload"); // Optional - add tag for image admin in Cloudinary
+  fd.append("tags", "browser_upload");
 
   const config = {
     headers: {

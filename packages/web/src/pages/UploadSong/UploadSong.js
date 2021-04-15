@@ -36,8 +36,8 @@ function UploadSong() {
           }}
         />
         {isUploadingSong && <p>Uploading song...</p>}
-        {uploadSongSuccess && <p>Upload successful...</p>}
-        {uploadSongError && <p>Upload error...</p>}
+        {uploadSongSuccess && <p>Upload successful!</p>}
+        {uploadSongError && <p>Upload error!</p>}
       </div>
     </div>
   );
