@@ -1,11 +1,12 @@
 import React from "react";
-import { func } from "prop-types";
+import { string, func } from "prop-types";
 import { useDropzone } from "react-dropzone";
 import "./Dropzone.scss";
+import { fileTypes } from "../../services/cloudinary";
 
-function Dropzone({ onFileSelected }) {
+function Dropzone({ fileType, onFileSelected }) {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-    accept: "audio/*",
+    accept: fileType === fileTypes.AUDIO ? "audio/*" : "image/*",
     maxFiles: 1,
     onDropAccepted: onFileSelected,
   });
@@ -34,6 +35,7 @@ function Dropzone({ onFileSelected }) {
 }
 
 Dropzone.propTypes = {
+  fileType: string.isRequired,
   onFileSelected: func,
 };
 
