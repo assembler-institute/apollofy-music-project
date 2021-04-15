@@ -1,1 +1,1 @@
-export { getFileUrl } from "./cloudinary";
+export { fileTypes, getFileUrl } from "./cloudinary";

@@ -1,5 +1,5 @@
 import * as UploaderTypes from "./uploader-types";
-import { getFileUrl } from "../../services/cloudinary";
+import { getFileUrl, fileTypes } from "../../services/cloudinary";
 
 export const uploadSongRequest = () => ({
   type: UploaderTypes.UPLOAD_SONG_REQUEST,
@@ -40,6 +40,7 @@ export function uploadSong({
 
     getFileUrl({
       file: file,
+      fileType: fileTypes.AUDIO,
       onUploadProgress: onUploadProgress,
     })
       .then((res) => {

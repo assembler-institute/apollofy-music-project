@@ -6,7 +6,6 @@ import Dropzone from "../../components/Dropzone";
 import "./UploadSong.scss";
 
 import { uploadSong } from "../../redux/uploader/uploader-actions";
-
 import { uploaderSelector } from "../../redux/uploader/uploader-selectors";
 
 function UploadSong() {
