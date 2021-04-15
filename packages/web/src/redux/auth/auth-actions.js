@@ -129,7 +129,7 @@ export const sendPasswordResetEmailRequest = () => ({
 
 export const sendPasswordResetEmailError = (message) => ({
   type: AuthTypes.SEND_PASSWORD_RESET_EMAIL_ERROR,
-  payload: message
+  payload: message,
 });
 
 export const sendPasswordResetEmailSuccess = () => ({
