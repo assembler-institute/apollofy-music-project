@@ -6,7 +6,7 @@ const cors = require("cors");
 
 const { config } = require("./config");
 const { errorMiddleware } = require("./middlewares");
-const { userRouter } = require("./routes");
+const { userRouter, trackRouter } = require("./routes");
 
 const app = express();
 
@@ -20,6 +20,7 @@ app.use(
 );
 
 app.use(userRouter);
+app.use(trackRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send({
