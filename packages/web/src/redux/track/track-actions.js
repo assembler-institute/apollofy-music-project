@@ -1,7 +1,7 @@
 import * as TrackTypes from "./track-types";
 import { trackTypes } from "./track-types";
 import api from "../../api";
-import { normalizeTracks, track } from "../../schema/track-schema";
+import { normalizeTracks } from "../../schema/track-schema";
 
 export const fetchTracksRequest = () => ({
   type: TrackTypes.FETCH_TRACKS_REQUEST,
@@ -36,6 +36,20 @@ export const fetchTrackError = (message) => ({
 
 export const fetchTrackSuccess = (track) => ({
   type: TrackTypes.FETCH_TRACK_SUCCESS,
+  payload: track,
+});
+
+export const publishTrackRequest = () => ({
+  type: TrackTypes.PUBLISH_TRACK_REQUEST,
+});
+
+export const publishTrackError = (message) => ({
+  type: TrackTypes.PUBLISH_TRACK_ERROR,
+  payload: message,
+});
+
+export const publishTrackSuccess = (track) => ({
+  type: TrackTypes.PUBLISH_TRACK_SUCCESS,
   payload: track,
 });
 
@@ -125,6 +139,20 @@ export function fetchTrackById(trackID) {
       dispatch(fetchTrackSuccess(res.data));
     } else {
       dispatch(fetchTrackError(res.errorMessage));
+    }
+  };
+}
+
+export function publishTrack(payload) {
+  return async function publishTrackThunk(dispatch) {
+    dispatch(publishTrackRequest());
+
+    const res = await api.publishTrack(payload);
+
+    if (res.isSuccessful) {
+      dispatch(publishTrackSuccess(res.data));
+    } else {
+      dispatch(publishTrackError(res.errorMessage));
     }
   };
 }

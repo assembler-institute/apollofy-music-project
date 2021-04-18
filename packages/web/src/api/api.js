@@ -144,6 +144,15 @@ function makeApi(request = makeRequest()) {
     });
   }
 
+  function publishTrack(body, headers) {
+    return request({
+      url: "/me/tracks",
+      requestMethod: "POST",
+      headers: headers,
+      body,
+    });
+  }
+
   return {
     login: login,
     signUp: signUp,
@@ -163,6 +172,7 @@ function makeApi(request = makeRequest()) {
     getTracks: getTracks,
     getPopularTracks: getPopularTracks,
     getRecommendedTracks: getRecommendedTracks,
+    publishTrack: publishTrack,
   };
 }
 
