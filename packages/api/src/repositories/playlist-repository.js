@@ -6,8 +6,16 @@ class PlaylistRepository {
     return normalizeDBQuery(db.Playlist.create(options));
   }
 
+  find(query) {
+    return normalizeDBQuery(db.Playlist.find(query, "-__v"));
+  }
+
   findOne(query) {
     return normalizeDBQuery(db.Playlist.findOne(query, "-__v"));
+  }
+
+  findById(id) {
+    return normalizeDBQuery(db.Playlist.findById(id, "-__v"));
   }
 }
 
