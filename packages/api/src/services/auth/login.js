@@ -1,4 +1,5 @@
 const { signOut } = require("./sign-out");
+const { UserRepo } = require("../../repositories");
 
 /**
  * Adds the user claims to the request object
@@ -9,16 +10,24 @@ const { signOut } = require("./sign-out");
  * req.user = { email: userClaims.email, uid: userClaims.uid }
  * req.signOut = auth.signOut
  */
-function login(req = {}, userClaims = {}) {
+async function login(req = {}, userClaims = {}) {
   const { email, uid } = userClaims;
 
   if (typeof email !== "string" || typeof uid !== "string") {
     throw new Error("Missing user claims");
   }
 
+  const user = await UserRepo.findOne({
+    firebase_id: uid,
+  });
+
+  if (!user) {
+    throw new Error("Invalid token");
+  }
+
   req.user = {
     email: email,
-    uid: uid,
+    id: user._id,
   };
 
   req.signOut = signOut;
