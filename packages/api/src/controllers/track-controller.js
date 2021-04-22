@@ -1,4 +1,5 @@
 const { UserRepo, TrackRepo } = require("../repositories");
+const { handleDbResponse } = require("../repositories/repo-utils");
 
 async function createTrack(req, res, next) {
   const {
@@ -18,7 +19,7 @@ async function createTrack(req, res, next) {
       firebase_id: uid,
     });
 
-    const response = await TrackRepo.create({
+    const dbResponse = await TrackRepo.create({
       title: title,
       url: url ? url : null,
       thumbnail: thumbnail ? thumbnail : null,
@@ -27,19 +28,32 @@ async function createTrack(req, res, next) {
       authorId: user._id,
     });
 
-    if (response.error) {
-      return res.status(500).send({
-        data: null,
-        error: response.error,
-      });
-    }
+    handleDbResponse(res, dbResponse);
+  } catch (error) {
+    next(error);
+  }
+}
 
-    if (response.data) {
-      return res.status(201).send({
-        data: "OK",
-        error: null,
-      });
-    }
+async function fetchTracks(req, res, next) {
+  const { params } = req;
+
+  console.log(req.headers);
+  try {
+    const dbResponse = await TrackRepo.find(params);
+    handleDbResponse(res, dbResponse);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function fetchTrackById(req, res, next) {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    const dbResponse = await TrackRepo.findById(id);
+    handleDbResponse(res, dbResponse);
   } catch (error) {
     next(error);
   }
@@ -47,4 +61,6 @@ async function createTrack(req, res, next) {
 
 module.exports = {
   createTrack: createTrack,
+  fetchTracks: fetchTracks,
+  fetchTrackById: fetchTrackById,
 };

@@ -24,6 +24,7 @@ const TrackSchema = Schema(
     rating: {
       type: Number,
       required: false,
+      default: 0.0,
     },
     color: {
       type: String,
@@ -37,7 +38,7 @@ const TrackSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
     },
-    artistId: {
+    artists: {
       type: [
         {
           type: Schema.Types.ObjectId,
