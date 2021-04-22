@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
-const { isEmail } = require("validator");
 
 const PlaylistSchema = Schema(
   {
@@ -15,7 +14,8 @@ const PlaylistSchema = Schema(
     },
     collaborative: {
       type: Boolean,
-      required: true,
+      required: false,
+      default: false,
     },
     thumbnail: {
       type: String,
@@ -24,31 +24,49 @@ const PlaylistSchema = Schema(
     },
     publicAccessible: {
       type: Boolean,
-      required: true,
+      required: false,
+      default: false,
     },
     numberSongs: {
       type: Number,
+      default: 0,
     },
     rating: {
       type: Number,
-      required: true,
+      required: false,
+      default: 0.0,
     },
     authorId: {
       type: Schema.Types.ObjectId,
       ref: "user",
     },
-    tracks: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "track",
-      },
-    ],
-    followedBy: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "user",
-      },
-    ],
+    tracks: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "track",
+        },
+      ],
+      default: [],
+    },
+    followedBy: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "user",
+        },
+      ],
+      default: [],
+    },
+    collaborators: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "user",
+        },
+      ],
+      default: [],
+    },
   },
   {
     timestamps: true,
