@@ -6,8 +6,16 @@ class GenreRepository {
     return normalizeDBQuery(db.Genre.create(options));
   }
 
+  find(query) {
+    return normalizeDBQuery(db.Genre.find(query, "-__v"));
+  }
+
   findOne(query) {
     return normalizeDBQuery(db.Genre.findOne(query, "-__v"));
+  }
+
+  findById(id) {
+    return normalizeDBQuery(db.Genre.findById(id, "-__v"));
   }
 }
 
