@@ -5,7 +5,6 @@ async function authMiddleware(req, res, next) {
     const bearerToken = await auth.getAuthToken(req.headers);
     const userClaims = await auth.verifyAuthToken(bearerToken);
 
-    auth.login(req, userClaims);
     await auth.login(req, userClaims);
 
     next();
