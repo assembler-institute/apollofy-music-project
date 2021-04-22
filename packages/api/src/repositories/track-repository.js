@@ -6,8 +6,16 @@ class TrackRepository {
     return normalizeDBQuery(db.Track.create(options));
   }
 
+  find(query) {
+    return normalizeDBQuery(db.Track.find(query, "-__v"));
+  }
+
   findOne(query) {
     return normalizeDBQuery(db.Track.findOne(query, "-__v"));
+  }
+
+  findById(id) {
+    return normalizeDBQuery(db.Track.findById(id, "-__v"));
   }
 }
 
