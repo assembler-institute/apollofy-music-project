@@ -10,7 +10,8 @@ const GenreSchema = Schema(
     },
     popularity: {
       type: Number,
-      required: true,
+      required: false,
+      default: 0.0,
     },
     tracks: [
       {
