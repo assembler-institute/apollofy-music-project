@@ -11,17 +11,15 @@ playlistRouter.post(
   playlistController.createPlaylist,
 );
 
-playlistRouter.get(
-  "/playlists",
-  authMiddleware,
-  playlistController.fetchPlaylists,
-);
+playlistRouter.get("/playlists", playlistController.fetchPlaylists);
 
 playlistRouter.get(
   "/playlists/:id",
   authMiddleware,
   playlistController.fetchPlaylistById,
 );
+
+playlistRouter.put("/playlists", playlistController.updatePlaylist);
 
 module.exports = {
   playlistRouter: playlistRouter,
