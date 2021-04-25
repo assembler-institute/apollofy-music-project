@@ -27,7 +27,7 @@ const PlaylistSchema = Schema(
       required: false,
       default: false,
     },
-    numberSongs: {
+    total_tracks: {
       type: Number,
       default: 0,
     },
