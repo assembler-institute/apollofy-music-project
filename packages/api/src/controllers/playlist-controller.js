@@ -1,4 +1,4 @@
-const { PlaylistRepo } = require("../repositories");
+const { PlaylistRepo, TrackRepo } = require("../repositories");
 const { handleDbResponse } = require("../repositories/repo-utils");
 
 async function createPlaylist(req, res, next) {
@@ -81,12 +81,39 @@ async function fetchPlaylistById(req, res, next) {
   }
 }
 
+async function addFullTracksInfo(playlists) {
+  try {
+    const newPlaylists = await Promise.all(
+      playlists.map(async (p) => {
+        if (p.tracks.length > 0) {
+          const tracks = await Promise.all(
+            p.tracks.map(async (tId) => {
+              const res = await TrackRepo.findById(tId);
+              return res.data;
+            }),
+          );
+          p.tracks = tracks;
+        }
+        return p;
+      }),
+    );
+    return newPlaylists;
+  } catch (err) {
+    return playlists;
+  }
+}
+
 async function fetchPlaylists(req, res, next) {
   const { params } = req;
-
+  const {
+    query: { fullFetch },
+  } = req;
   try {
     const dbResponse = await PlaylistRepo.find(params);
-    console.log(dbResponse);
+    if (fullFetch) {
+      dbResponse.data = await addFullTracksInfo(dbResponse.data);
+    }
+
     handleDbResponse(res, dbResponse);
   } catch (err) {
     next(err);
