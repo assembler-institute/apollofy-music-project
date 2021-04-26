@@ -20,6 +20,12 @@ class PlaylistRepository {
     return normalizeDBQuery(db.Playlist.findOne(query, "-__v"));
   }
 
+  findOneAndUpdate(queryFilter, queryData, queryOptions) {
+    return normalizeDBQuery(
+      db.Playlist.findOneAndUpdate(queryFilter, queryData, queryOptions),
+    );
+  }
+
   findById(id) {
     return normalizeDBQuery(db.Playlist.findById(id, "-__v"));
   }
