@@ -3,14 +3,19 @@ const { Schema } = require("mongoose");
 
 const PlaylistSchema = Schema(
   {
-    name: {
+    title: {
       type: String,
-      required: [true, "Playlist name is required"],
+      required: [true, "Playlist title is required"],
       trim: true,
     },
     description: {
       type: String,
       required: false,
+    },
+    type: {
+      type: String,
+      enum: ["Playlist", "Album"],
+      required: true,
     },
     collaborative: {
       type: Boolean,
@@ -31,12 +36,7 @@ const PlaylistSchema = Schema(
       type: Number,
       default: 0,
     },
-    rating: {
-      type: Number,
-      required: false,
-      default: 0.0,
-    },
-    authorId: {
+    author: {
       type: Schema.Types.ObjectId,
       ref: "user",
     },
