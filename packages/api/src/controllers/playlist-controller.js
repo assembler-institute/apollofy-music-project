@@ -3,28 +3,32 @@ const { handleDbResponse } = require("../repositories/repo-utils");
 
 async function createPlaylist(req, res, next) {
   const {
-    body: { name, description, collaborative, thumbnail, tracks },
+    body: { title, type, publicAccessible, tracks },
     user: { id },
   } = req;
 
   try {
-    if (!name) {
-      return res.status(400).send({
+    const dbResponse = await PlaylistRepo.create({
+      title: title,
+      type: type,
+      author: id,
+      publicAccessible: publicAccessible,
+      tracks: tracks ? tracks : [],
+    });
+
+    if (dbResponse.error) {
+      res.status(400).send({
         data: null,
-        error: "Missing fields (title, authorId)",
+        error: dbResponse.error,
       });
     }
 
-    const dbResponse = await PlaylistRepo.create({
-      name: name,
-      description: description,
-      thumbnail: thumbnail ? thumbnail : null,
-      collaborative: collaborative ? collaborative : false,
-      tracks: tracks ? tracks : [],
-      authorId: id,
-    });
-
-    handleDbResponse(res, dbResponse);
+    if (dbResponse.data) {
+      res.status(201).send({
+        data: dbResponse.data,
+        error: null,
+      });
+    }
   } catch (err) {
     next(err);
   }
@@ -32,89 +36,125 @@ async function createPlaylist(req, res, next) {
 
 async function updatePlaylist(req, res, next) {
   const {
-    body: { _id: id, name, description, collaborative, thumbnail, tracks },
+    body: { _id, title, type, publicAccessible, tracks, followedBy },
+    user: { id },
   } = req;
 
   try {
-    let dbResponse = await PlaylistRepo.findById({
-      _id: id,
-    });
-    console.log("FIND RESPONSE");
-    console.log(dbResponse.data);
+    const dbResponse = await PlaylistRepo.findOneAndUpdate(
+      {
+        _id: _id,
+      },
+      {
+        title: title,
+        type: type,
+        publicAccessible: publicAccessible,
+        tracks: tracks,
+        followedBy: followedBy,
+      },
+      {
+        new: true,
+        select: {
+          __v: 0,
+        },
+      },
+    );
 
-    if (dbResponse.data) {
-      if (name) dbResponse.data.name = name;
-      if (description) dbResponse.data.description = description;
-      if (collaborative) dbResponse.data.collaborative = collaborative;
-      if (thumbnail) dbResponse.data.thumbnail = thumbnail;
-      if (tracks) {
-        dbResponse.data.tracks = tracks;
-        dbResponse.data.total_tracks = tracks.length;
-      }
-
-      const putResponse = await PlaylistRepo.update(dbResponse.data);
-      dbResponse = putResponse;
+    if (dbResponse.error) {
+      res.status(400).send({
+        data: null,
+        error: dbResponse.error,
+      });
     }
 
-    console.log("UPDATE RESPONSE");
-    console.log(dbResponse.data);
+    if (dbResponse.data) {
+      res.status(200).send({
+        data: dbResponse.data,
+        error: null,
+      });
+    }
 
-    handleDbResponse(res, dbResponse);
+    console.log(dbResponse);
   } catch (err) {
     next(err);
   }
+}
+
+async function addFullTracksInfo(playlist) {
+  const newTracks = await Promise.all(
+    playlist.tracks.map(async (trackId) => {
+      const trackResponse = await TrackRepo.findById(trackId);
+      if (trackResponse.data) {
+        return trackResponse.data;
+      }
+      return { _id: trackId };
+    }),
+  );
+  playlist.tracks = newTracks;
+  return playlist;
 }
 
 async function fetchPlaylistById(req, res, next) {
   const {
     params: { id },
+    query: { fullFetch },
   } = req;
 
   try {
-    const dbResponse = await PlaylistRepo.findById({
-      _id: id,
-    });
-    console.log(dbResponse);
-    handleDbResponse(res, dbResponse);
+    const dbResponse = await PlaylistRepo.findById(id);
+
+    if (dbResponse.error) {
+      res.status(400).send({
+        data: null,
+        error: dbResponse.error,
+      });
+    }
+
+    if (dbResponse.data) {
+      if (fullFetch) {
+        dbResponse.data = await addFullTracksInfo(dbResponse.data);
+      }
+      if (dbResponse.data) {
+        res.status(200).send({
+          data: dbResponse.data,
+          error: null,
+        });
+      }
+    }
   } catch (err) {
     next(err);
   }
 }
 
-async function addFullTracksInfo(playlists) {
-  try {
-    const newPlaylists = await Promise.all(
-      playlists.map(async (p) => {
-        if (p.tracks.length > 0) {
-          const tracks = await Promise.all(
-            p.tracks.map(async (tId) => {
-              const res = await TrackRepo.findById(tId);
-              return res.data;
-            }),
-          );
-          p.tracks = tracks;
-        }
-        return p;
-      }),
-    );
-    return newPlaylists;
-  } catch (err) {
-    return playlists;
-  }
-}
-
 async function fetchPlaylists(req, res, next) {
-  const { params } = req;
   const {
     query: { fullFetch },
   } = req;
+
   try {
-    const dbResponse = await PlaylistRepo.find(params);
-    if (fullFetch) {
-      dbResponse.data = await addFullTracksInfo(dbResponse.data);
+    let dbResponse = await PlaylistRepo.find();
+
+    if (dbResponse.error) {
+      res.status(400).send({
+        data: null,
+        error: dbResponse.error,
+      });
     }
 
-    handleDbResponse(res, dbResponse);
+    if (dbResponse.data) {
+      if (fullFetch) {
+        dbResponse.data = await Promise.all(
+          dbResponse.data.map(async (p) => {
+            const newPlaylist = await addFullTracksInfo(p);
+            return newPlaylist;
+          }),
+        );
+      }
+      res.status(200).send({
+        data: dbResponse.data,
+        error: null,
+      });
+    }
   } catch (err) {
     next(err);
   }
