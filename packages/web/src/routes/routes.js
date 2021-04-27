@@ -9,3 +9,4 @@ export const WEB_PLAYER_HOME = "/web-player";
 export const WEB_PLAYER_SEARCH = "/web-player/search";
 export const WEB_PLAYER_LIBRARY = "/web-player/library";
 export const WEB_PLAYER_PLAYLIST = "/web-player/playlists/:id";
+export const WEB_PLAYER_STATS = "/web-player/stats";
