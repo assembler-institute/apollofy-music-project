@@ -51,8 +51,11 @@ function App() {
           path={ROUTES.WEB_PLAYER_SEARCH}
           component={PAGES.WebPlayerSearch}
         />
+        <Route
+          path={ROUTES.WEB_PLAYER_STATS}
+          component={PAGES.WebPlayerStats}
+        />
         <Route path={ROUTES.WEB_PLAYER_HOME} component={PAGES.WebPlayerHome} />
-
         <Route path={ROUTES.RESET_PASSWORD} component={PAGES.ResetPassword} />
         <Route path={ROUTES.HOME} component={PAGES.Home} exact />
       </Switch>
