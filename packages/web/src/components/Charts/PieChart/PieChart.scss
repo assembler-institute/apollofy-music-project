@@ -1,0 +1,16 @@
+.PieChart {
+  @apply w-full h-full p-4 bg-dark-dark rounded-md;
+
+  &__wrapper {
+    @apply w-full h-full flex flex-col justify-center items-center;
+  }
+
+  &__title {
+    @apply text-light font-bold mb-4;
+  }
+
+  &__canvas {
+    width: 90%;
+    height: 70%;
+  }
+}
