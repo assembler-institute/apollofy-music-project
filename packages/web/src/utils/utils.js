@@ -30,3 +30,16 @@ export const validatePassword = (password) => {
 export const urlWithQuery = (url, key, value) => {
   return `${url}?${key}=${value}`;
 };
+
+export const randomHexColor = () => {
+  const color = Math.floor(Math.random() * 16777215).toString(16);
+  return `#${color}`;
+};
+
+export const randomRGBColor = () => {
+  const random = [];
+  for (let i = 0; i < 3; i += 1) {
+    random.push(Math.floor(Math.random() * 256));
+  }
+  return random;
+};
