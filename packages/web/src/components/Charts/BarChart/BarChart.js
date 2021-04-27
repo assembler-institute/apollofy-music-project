@@ -10,6 +10,8 @@ import { randomRGBColor } from "../../../utils/utils";
 
 function BarChart({ title, axis, labels, values, classes }) {
   const options = {
+    maintainAspectRatio: false,
+    responsive: true,
     indexAxis: axis,
     layout: {
       padding: 0,
@@ -85,7 +87,9 @@ function BarChart({ title, axis, labels, values, classes }) {
     <div className="BarChart">
       <div className="BarChart__wrapper">
         <h2 className="BarChart__title">{title}</h2>
-        <Bar data={data} options={options} />
+        <div className="BarChart__canvas">
+          <Bar data={data} options={options} />
+        </div>
       </div>
     </div>
   );
