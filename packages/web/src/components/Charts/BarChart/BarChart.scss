@@ -1,0 +1,11 @@
+.BarChart {
+  @apply w-7/12 h-auto p-4 bg-dark-dark rounded-md;
+
+  &__wrapper {
+    @apply flex flex-col justify-center items-center;
+  }
+
+  &__title {
+    @apply text-light font-bold;
+  }
+}
