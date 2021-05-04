@@ -4,6 +4,7 @@ export const LOGIN = "/login";
 export const RESET_PASSWORD = "/reset-password";
 export const UPLOAD_SONG = "/upload-song";
 export const UPLOAD_IMAGE = "/upload-image";
+export const UPLOAD_PLAYBACK = "/upload-playback";
 export const CREATE_PLAYLIST = "/playlist/create";
 export const WEB_PLAYER_HOME = "/web-player";
 export const WEB_PLAYER_SEARCH = "/web-player/search";
