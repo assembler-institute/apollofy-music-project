@@ -1,4 +1,5 @@
 const { PlaylistRepo, TrackRepo } = require("../repositories");
+// eslint-disable-next-line no-unused-vars
 const { handleDbResponse } = require("../repositories/repo-utils");
 
 async function createPlaylist(req, res, next) {

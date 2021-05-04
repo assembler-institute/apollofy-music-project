@@ -4,7 +4,6 @@ async function authMiddleware(req, res, next) {
   try {
     const bearerToken = await auth.getAuthToken(req.headers);
     const userClaims = await auth.verifyAuthToken(bearerToken);
-
     await auth.login(req, userClaims);
 
     next();
@@ -13,7 +12,7 @@ async function authMiddleware(req, res, next) {
 
     res.status(401).send({
       data: null,
-      error: "Unauthorized",
+      error: error,
     });
   }
 }
