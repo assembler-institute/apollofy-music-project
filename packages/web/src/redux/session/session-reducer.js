@@ -1,106 +1,70 @@
 import * as SessionTypes from "./session-types";
 
 export const SessionInitState = {
-  isLoggingIn: false,
-  loginError: null,
-  isAuthenticated: false,
-  isSigningUp: false,
-  signUpError: null,
-  signUpSuccess: false,
-  isSigningOut: false,
-  signOutError: null,
-  currentUser: {},
+  userAgentLoading: false,
+  userAgentError: null,
+  userAgent: null,
+  coordinatesLoading: false,
+  coordinatesError: null,
+  coordinates: {
+    lat: null,
+    long: null,
+  },
 };
 
 const SessionReducer = (state = SessionInitState, action) => {
   switch (action.type) {
-    case SessionTypes.SIGNUP_REQUEST: {
+    case SessionTypes.USER_AGENT_REQUEST: {
       return {
         ...state,
-        isSigningUp: true,
-        signUpError: null,
-        signUpSuccess: false,
+        userAgentLoading: true,
+        userAgentError: false,
       };
     }
-    case SessionTypes.SIGNUP_SUCCESS: {
+    case SessionTypes.USER_AGENT_ERROR: {
       return {
         ...state,
-        signUpSuccess: true,
-        isSigningUp: false,
-        loginError: null,
-        currentUser: {
-          name: action.payload.name,
-          lastname: action.payload.lastname,
-          email: action.payload.email,
-          token: action.payload.token,
+        userAgentLoading: false,
+        userAgentError: action.payload,
+      };
+    }
+    case SessionTypes.USER_AGENT_SUCCESS: {
+      return {
+        ...state,
+        userAgentLoading: false,
+        userAgentError: false,
+        userAgent: action.payload,
+      };
+    }
+    case SessionTypes.COORDINATES_REQUEST: {
+      return {
+        ...state,
+        coordinatesLoading: true,
+        coordinatesError: null,
+      };
+    }
+    case SessionTypes.COORDINATES_ERROR: {
+      return {
+        ...state,
+        coordinatesLoading: false,
+        coordinatesError: action.payload,
+        coordinates: {
+          lat: null,
+          long: null,
         },
       };
     }
-    case SessionTypes.SIGNUP_ERROR: {
+    case SessionTypes.COORDINATES_SUCCESS: {
       return {
         ...state,
-        isSigningUp: false,
-        signUpSuccess: false,
-        signUpError: action.payload,
-      };
-    }
-    case SessionTypes.LOGIN_REQUEST: {
-      return {
-        ...state,
-        isLoggingIn: true,
-        loginError: null,
-      };
-    }
-    case SessionTypes.LOGIN_SUCCESS: {
-      return {
-        ...state,
-        isAuthenticated: true,
-        isLoggingIn: false,
-        loginError: null,
-        currentUser: {
-          ...action.payload.user,
-          token: action.payload.token,
-        },
-      };
-    }
-    case SessionTypes.LOGIN_ERROR: {
-      return {
-        ...state,
-        isLoggingIn: false,
-        loginError: action.payload,
-      };
-    }
-    case SessionTypes.SIGNOUT_REQUEST: {
-      return {
-        ...state,
-        isSigningOut: true,
-        signOutError: null,
-      };
-    }
-    case SessionTypes.SIGNOUT_ERROR: {
-      return {
-        ...state,
-        isSigningOut: false,
-        signOutError: action.payload,
-      };
-    }
-    case SessionTypes.SIGNOUT_SUCCESS: {
-      return {
-        ...state,
-        isSigningOut: false,
-        signOutError: null,
-        isAuthenticated: false,
-        currentUser: {
-          name: null,
-          lastname: null,
-          email: null,
-          token: null,
-        },
+        coordinatesLoading: false,
+        coordinatesError: null,
+        coordinates: action.payload,
       };
     }
 
     default: {
-      return state;
+      return { ...state };
     }
   }
 };
