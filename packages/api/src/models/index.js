@@ -4,13 +4,13 @@ const TrackModel = require("./general/track-model");
 const PlaylistModel = require("./general/playlist-model");
 const GenreModel = require("./general/genre-model");
 // Data Analysis
-const DailyPageRequestModel = require("./data-analysis/daily-page-request-model");
+const PageRequestModel = require("./data-analysis/page-request-model");
 const MonthlyPageRequestModel = require("./data-analysis/monthly-page-request-model");
 
 const TrackPlaybackModel = require("./data-analysis/track-playback-model");
 const MonthlyTrackPlaybackModel = require("./data-analysis/monthly-track-playback-model");
 
-const DailyGenrePlaybackModel = require("./data-analysis/daily-genre-playback-model");
+const GenrePlaybackModel = require("./data-analysis/genre-playback-model");
 const MonthlyGenrePlaybackModel = require("./data-analysis/monthly-genre-playback-model");
 
 module.exports = {
@@ -18,10 +18,10 @@ module.exports = {
   Track: TrackModel,
   Playlist: PlaylistModel,
   Genre: GenreModel,
-  DailyPageRequest: DailyPageRequestModel,
+  PageRequestModel: PageRequestModel,
   MonthlyPageRequest: MonthlyPageRequestModel,
   TrackPlayback: TrackPlaybackModel,
   MonthlyTrackPlayback: MonthlyTrackPlaybackModel,
-  DailyGenrePlayback: DailyGenrePlaybackModel,
+  GenrePlaybackModel: GenrePlaybackModel,
   MonthlyGenrePlayback: MonthlyGenrePlaybackModel,
 };
