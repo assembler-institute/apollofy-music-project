@@ -87,7 +87,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
