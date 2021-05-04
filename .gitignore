@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/yarn,react,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=yarn,react,node
 
@@ -81,3 +80,6 @@ node_modules
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn,react,node
+
+# react build
+**/build
