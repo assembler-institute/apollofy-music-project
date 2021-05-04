@@ -1,12 +1,22 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./Home.scss";
 import Header from "../../components/Header";
 import { authSelector } from "../../redux/auth/auth-selectors";
+import {
+  getUserAgent,
+  getCoordinates,
+} from "../../redux/session/session-actions";
 
 function Home() {
+  const dispatch = useDispatch();
   const { isAuthenticated, currentUser } = useSelector(authSelector);
+
+  useEffect(() => {
+    dispatch(getUserAgent());
+    dispatch(getCoordinates());
+  }, [dispatch]);
 
   return (
     <main className="p-4">

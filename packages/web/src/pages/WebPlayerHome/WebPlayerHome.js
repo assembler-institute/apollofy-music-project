@@ -62,9 +62,6 @@ function WebPlayerHome(props) {
     history.push(`/web-player/playlists/${id}`);
   };
 
-  // eslint-disable-next-line no-console
-  console.log(playlistIds);
-
   let playlists = [];
   if (playlistsFetched) {
     playlists = playlistIds.ALL.map((id, index) => {

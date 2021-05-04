@@ -40,6 +40,9 @@ function Header() {
           <li className="mr-4 px-3 py-2 bg-gray-600">
             <NavLink to={ROUTES.WEB_PLAYER_STATS}>Statistics</NavLink>
           </li>
+          <li className="mr-4 px-3 py-2 bg-gray-600">
+            <NavLink to={ROUTES.UPLOAD_PLAYBACK}>Upload Playback</NavLink>
+          </li>
         </ul>
 
         {isAuthenticated && (
