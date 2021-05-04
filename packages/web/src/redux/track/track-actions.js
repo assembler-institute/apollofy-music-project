@@ -1,7 +1,6 @@
 import * as TrackTypes from "./track-types";
 import { trackTypes } from "./track-types";
 import api from "../../api";
-import { normalizeTracks, track } from "../../schema/track-schema";
 import { normalizeTracks } from "../../schema/track-schema";
 import { signOutSuccess } from "../auth/auth-actions";
 
@@ -141,6 +140,34 @@ export function fetchTrackById(trackID) {
       dispatch(fetchTrackSuccess(res.data));
     } else {
       dispatch(fetchTrackError(res.errorMessage));
+    }
+  };
+}
+
+export function playTrack({ trackId, lat, long, agent }) {
+  return async function playTrackThunk(dispatch) {
+    try {
+      const userToken = await getCurrentUserToken();
+
+      if (!userToken) {
+        return dispatch(signOutSuccess());
+      }
+
+      api.addTrackPlayback({
+        trackID: trackId,
+        body: {
+          lat: lat,
+          long: long,
+          agent: agent,
+        },
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+
+      return {};
+    } catch (err) {
+      return {};
     }
   };
 }
