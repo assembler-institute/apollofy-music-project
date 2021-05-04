@@ -1,9 +1,13 @@
-const db = require("../models");
-const normalizeDBQuery = require("../utils/normalizeDBQuery");
+const db = require("../../models");
+const normalizeDBQuery = require("../../utils/normalizeDBQuery");
 
 class UserRepository {
   create(options) {
     return normalizeDBQuery(db.User.create(options));
+  }
+
+  find(query) {
+    return normalizeDBQuery(db.User.find(query, "-__v"));
   }
 
   findOne(query) {
