@@ -9,6 +9,7 @@ function Select({ id, options, handleChange, classes, ...props }) {
     {
       [`border-radius`]: true,
       [`form-select`]: true,
+      [`text-dark`]: true,
     },
     ...classes,
   );
@@ -16,7 +17,9 @@ function Select({ id, options, handleChange, classes, ...props }) {
   return (
     <select id={id} className={classNames} onBlur={handleChange} {...props}>
       {options.map((opt) => (
-        <option key={opt.id}>{opt.option}</option>
+        <option key={opt.id} value={opt.id}>
+          {opt.option}
+        </option>
       ))}
     </select>
   );

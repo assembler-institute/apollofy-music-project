@@ -163,6 +163,15 @@ function makeApi(request = makeRequest()) {
     });
   }
 
+  function addTrackPlayback({ trackID, headers = {}, body }) {
+    return request({
+      url: `/tracks/${trackID}/playback`,
+      requestMethod: "POST",
+      headers: headers,
+      body: body,
+    });
+  }
+
   return {
     login: login,
     signUp: signUp,
@@ -184,6 +193,7 @@ function makeApi(request = makeRequest()) {
     getTracks: getTracks,
     getPopularTracks: getPopularTracks,
     getRecommendedTracks: getRecommendedTracks,
+    addTrackPlayback: addTrackPlayback,
   };
 }
 

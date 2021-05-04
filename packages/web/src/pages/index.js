@@ -4,6 +4,7 @@ import Login from "./Login";
 import ResetPassword from "./ResetPassword";
 import UploadSong from "./UploadSong";
 import UploadImage from "./UploadImage";
+import UploadPlayback from "./UploadPlayback";
 import CreatePlaylist from "./CreatePlaylist";
 import WebPlayerHome from "./WebPlayerHome";
 import WebPlayerLibrary from "./WebPlayerLibrary";
@@ -18,6 +19,7 @@ export {
   ResetPassword,
   UploadSong,
   UploadImage,
+  UploadPlayback,
   CreatePlaylist,
   WebPlayerHome,
   WebPlayerLibrary,

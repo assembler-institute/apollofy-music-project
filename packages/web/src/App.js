@@ -38,6 +38,7 @@ function App() {
         <Route path={ROUTES.LOGIN} component={PAGES.Login} />
         <Route path={ROUTES.UPLOAD_SONG} component={PAGES.UploadSong} />
         <Route path={ROUTES.UPLOAD_IMAGE} component={PAGES.UploadImage} />
+        <Route path={ROUTES.UPLOAD_PLAYBACK} component={PAGES.UploadPlayback} />
         <Route path={ROUTES.CREATE_PLAYLIST} component={PAGES.CreatePlaylist} />
         <Route
           path={ROUTES.WEB_PLAYER_PLAYLIST}
