@@ -33,6 +33,9 @@ const TrackReducer = (state = TrackInitState, action) => {
     }
     case TrackTypes.FETCH_TRACKS_SUCCESS: {
       const fetchType = action.payload.type;
+      const newIds = { ...state.ids };
+      newIds[fetchType] = [...action.payload.ids];
+
       return {
         ...state,
         tracksLoading: false,
@@ -42,10 +45,7 @@ const TrackReducer = (state = TrackInitState, action) => {
           ...state.byID,
           ...action.payload.byID,
         },
-        ids: {
-          ...state.ids,
-          fetchType: [...state.ids[fetchType], ...action.payload.ids],
-        },
+        ids: newIds,
       };
     }
     case TrackTypes.FETCH_TRACK_REQUEST: {
