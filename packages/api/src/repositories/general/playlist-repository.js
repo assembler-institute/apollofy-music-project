@@ -1,5 +1,5 @@
-const db = require("../models");
-const normalizeDBQuery = require("../utils/normalizeDBQuery");
+const db = require("../../models");
+const normalizeDBQuery = require("../../utils/normalizeDBQuery");
 
 class PlaylistRepository {
   create(options) {
