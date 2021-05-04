@@ -34,7 +34,7 @@ const TrackSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: "genre",
     },
-    authorId: {
+    author: {
       type: Schema.Types.ObjectId,
       ref: "user",
     },
