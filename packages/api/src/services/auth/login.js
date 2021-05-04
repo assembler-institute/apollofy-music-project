@@ -27,7 +27,7 @@ async function login(req = {}, userClaims = {}) {
 
   req.user = {
     email: email,
-    id: user._id,
+    id: user.data._id,
   };
 
   req.signOut = signOut;
