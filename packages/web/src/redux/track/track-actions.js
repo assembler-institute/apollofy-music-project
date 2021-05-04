@@ -2,6 +2,10 @@ import * as TrackTypes from "./track-types";
 import { trackTypes } from "./track-types";
 import api from "../../api";
 import { normalizeTracks, track } from "../../schema/track-schema";
+import { normalizeTracks } from "../../schema/track-schema";
+import { signOutSuccess } from "../auth/auth-actions";
+
+import { getCurrentUserToken } from "../../services/auth";
 
 export const fetchTracksRequest = () => ({
   type: TrackTypes.FETCH_TRACKS_REQUEST,
@@ -57,18 +61,30 @@ export function fetchAllTracks(filters) {
   return async function fetchTracksThunk(dispatch) {
     dispatch(fetchTracksRequest());
 
-    const res = await api.getTracks(filters);
+    try {
+      const userToken = await getCurrentUserToken();
 
-    if (res.isSuccessful) {
-      const normalizedTracks = normalizeTracks(res.data);
-      dispatch(
+      if (!userToken) {
+        return dispatch(signOutSuccess());
+      }
+
+      const res = await api.getTracks({
+        Authorization: `Bearer ${userToken}`,
+      });
+
+      if (res.errorMessage) {
+        return dispatch(fetchTracksError(res.errorMessage));
+      }
+
+      const normalizedTracks = normalizeTracks(res.data.data);
+      return dispatch(
         fetchTracksSuccess({
           byID: normalizedTracks.entities.tracks,
           ids: normalizedTracks.result,
         }),
       );
-    } else {
-      dispatch(fetchTracksError(res.errorMessage));
+    } catch (err) {
+      return dispatch(fetchTracksError(err));
     }
   };
 }
