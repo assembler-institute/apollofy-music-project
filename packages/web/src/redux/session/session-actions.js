@@ -1,105 +1,65 @@
-import api from "../../api";
 import * as SessionTypes from "./session-types";
 
-export const loginRequest = () => ({
-  type: SessionTypes.LOGIN_REQUEST,
+export const userAgentRequest = () => ({
+  type: SessionTypes.USER_AGENT_REQUEST,
 });
 
-export const loginError = (message) => ({
-  type: SessionTypes.LOGIN_ERROR,
+export const userAgentError = (message) => ({
+  type: SessionTypes.USER_AGENT_ERROR,
   payload: message,
 });
 
-export const loginSuccess = ({ user, token }) => ({
-  type: SessionTypes.LOGIN_SUCCESS,
-  payload: {
-    user: user,
-    token: token,
-  },
+export const userAgentSuccess = (data) => ({
+  type: SessionTypes.USER_AGENT_SUCCESS,
+  payload: data,
 });
 
-export const signUpRequest = () => ({
-  type: SessionTypes.SIGNUP_REQUEST,
+export const coordinatesRequest = () => ({
+  type: SessionTypes.COORDINATES_REQUEST,
 });
 
-export const signUpError = (message) => ({
-  type: SessionTypes.SIGNUP_ERROR,
+export const coordinatesError = (message) => ({
+  type: SessionTypes.COORDINATES_ERROR,
   payload: message,
 });
 
-export const signUpSuccess = (user) => ({
-  type: SessionTypes.SIGNUP_SUCCESS,
-  payload: user,
+export const coordinatesSuccess = (data) => ({
+  type: SessionTypes.COORDINATES_SUCCESS,
+  payload: data,
 });
 
-export const signOutRequest = () => ({
-  type: SessionTypes.SIGNOUT_REQUEST,
-});
+export function getUserAgent() {
+  return async function userAgentThunk(dispatch) {
+    dispatch(userAgentRequest());
 
-export const signOutError = (message) => ({
-  type: SessionTypes.SIGNOUT_REQUEST,
-  payload: message,
-});
-
-export const signOutSuccess = () => ({
-  type: SessionTypes.SIGNOUT_SUCCESS,
-});
-
-export function login({ username, password }) {
-  return async function requestTokenThunk(dispatch) {
-    dispatch(loginRequest());
-
-    const requestBody = {
-      username: username,
-      password: password,
-      rememberMe: true,
-    };
-
-    const res = await api.login(requestBody);
-
-    if (res.isSuccessful) {
-      dispatch(
-        loginSuccess({
-          token: res.data.token,
-        }),
-      );
-    } else {
-      dispatch(loginError(res.errorMessage));
+    if (!("userAgent" in navigator)) {
+      dispatch(userAgentError("User Agent not supported"));
     }
+
+    dispatch(userAgentSuccess(navigator.userAgent));
   };
 }
 
-export function signUp({ name, email, password }) {
-  return async function signUpThunk(dispatch) {
-    dispatch(signUpRequest());
+export function getCoordinates() {
+  return async function coordinatesThunk(dispatch) {
+    dispatch(coordinatesRequest());
 
-    const requestBody = {
-      login: name,
-      name: name,
-      email: email,
-      password: password,
-      langKey: "en",
-    };
-
-    const res = await api.signUp({ body: requestBody });
-
-    if (res.isSuccessful) {
-      dispatch(signUpSuccess(res.data));
-    } else {
-      dispatch(signUpError(res.error));
+    if (!("geolocation" in navigator)) {
+      dispatch(coordinatesError("Geolocation not supported"));
     }
-  };
-}
 
-export function signOut() {
-  return async function logoutThunk(dispatch, getState) {
-    const token = getState().user.currentUser.token;
-
-    if (token) {
-      dispatch(signOutRequest());
-      dispatch(signOutSuccess());
-    } else {
-      dispatch(signOutError("Missing auth token"));
-    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        dispatch(
+          coordinatesSuccess({
+            lat: pos.coords.latitude,
+            long: pos.coords.longitude,
+          }),
+        );
+      },
+      (err) => {
+        dispatch(coordinatesError(err));
+      },
+    );
   };
 }
