@@ -57,5 +57,9 @@ module.exports = {
         assert: "htmlFor",
       },
     ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { devDependencies: ["tailwind.config.js", "craco.config.js"] },
+    ],
   },
 };
