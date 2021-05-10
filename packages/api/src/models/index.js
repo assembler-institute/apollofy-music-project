@@ -8,10 +8,9 @@ const PageRequestModel = require("./data-analysis/page-request-model");
 const MonthlyPageRequestModel = require("./data-analysis/monthly-page-request-model");
 
 const TrackPlaybackModel = require("./data-analysis/track-playback-model");
-const MonthlyTrackPlaybackModel = require("./data-analysis/monthly-track-playback-model");
+const TrackStatisticsModel = require("./data-analysis/track-statistics-model");
 
-const GenrePlaybackModel = require("./data-analysis/genre-playback-model");
-const MonthlyGenrePlaybackModel = require("./data-analysis/monthly-genre-playback-model");
+const GenreStatisticsModel = require("./data-analysis/genre-statistics-model");
 
 module.exports = {
   User: UserModel,
@@ -21,7 +20,6 @@ module.exports = {
   PageRequestModel: PageRequestModel,
   MonthlyPageRequest: MonthlyPageRequestModel,
   TrackPlayback: TrackPlaybackModel,
-  MonthlyTrackPlayback: MonthlyTrackPlaybackModel,
-  GenrePlaybackModel: GenrePlaybackModel,
-  MonthlyGenrePlayback: MonthlyGenrePlaybackModel,
+  TrackStatistics: TrackStatisticsModel,
+  GenreStatistics: GenreStatisticsModel,
 };
