@@ -13,7 +13,15 @@ const TrackPlaybackSchema = Schema(
           type: Schema.Types.ObjectId,
           ref: "track",
         },
+        trackTitle: {
+          type: String,
+          trim: true,
+        },
       },
+    },
+    totalPlaybacks: {
+      type: Number,
+      default: 0,
     },
     playbacks: {
       type: [
