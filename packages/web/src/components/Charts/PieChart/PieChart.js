@@ -62,7 +62,7 @@ function PieChart({ title, axis, labels, showLabels, values, classes }) {
       setBackgroundColors(colors[0]);
       setBorderColors(colors[1]);
     });
-  }, []);
+  });
 
   const data = {
     labels: labels,

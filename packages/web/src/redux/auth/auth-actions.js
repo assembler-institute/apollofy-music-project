@@ -1,5 +1,6 @@
 import * as AuthTypes from "./auth-types";
 import api from "../../api";
+import { updateAxiosHeaders } from "../../api/api-utils";
 import * as auth from "../../services/auth";
 
 export const resetStoreAndLogOut = () => ({
@@ -66,6 +67,7 @@ export function syncSignIn() {
       return dispatch(signUpError(response.errorMessage));
     }
 
+    updateAxiosHeaders({ Authorization: `Bearer ${token}` });
     return dispatch(signUpSuccess(response.data));
   };
 }
@@ -98,7 +100,7 @@ export function signOut() {
     }
 
     auth.signOut();
-
+    updateAxiosHeaders({ Authorization: "" });
     return dispatch(signOutSuccess());
   };
 }

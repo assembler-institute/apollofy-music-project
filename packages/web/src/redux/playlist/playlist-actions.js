@@ -97,9 +97,6 @@ export function createPlaylist({ title, type, thumbnail, publicAccessible }) {
           thumbnail: thumbnail,
           publicAccessible: publicAccessible,
         },
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
       });
 
       if (res.errorMessage) {
@@ -181,9 +178,7 @@ export function fetchAllPlaylists() {
         return dispatch(signOutSuccess());
       }
 
-      const res = await api.getPlaylists({
-        Authorization: `Bearer ${userToken}`,
-      });
+      const res = await api.getPlaylists();
 
       if (res.errorMessage) {
         return dispatch(fetchPlaylistsError(res.errorMessage));

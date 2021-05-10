@@ -7,10 +7,12 @@ import SearchReducer from "./search/search-reducer";
 import TrackReducer from "./track/track-reducer";
 import SessionReducer from "./session/session-reducer";
 import UploaderReducer from "./uploader/uploader-reducer";
+import StatsReducer from "./stats/stats-reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   users: UserReducer,
+  stats: StatsReducer,
   tracks: TrackReducer,
   playlists: PlaylistReducer,
   search: SearchReducer,

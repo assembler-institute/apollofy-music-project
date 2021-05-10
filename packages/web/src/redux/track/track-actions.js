@@ -1,9 +1,9 @@
 import * as TrackTypes from "./track-types";
 import { trackTypes } from "./track-types";
 import api from "../../api";
+
 import { normalizeTracks } from "../../schema/track-schema";
 import { signOutSuccess } from "../auth/auth-actions";
-
 import { getCurrentUserToken } from "../../services/auth";
 
 export const fetchTracksRequest = () => ({
@@ -67,9 +67,7 @@ export function fetchAllTracks(filters) {
         return dispatch(signOutSuccess());
       }
 
-      const res = await api.getTracks({
-        Authorization: `Bearer ${userToken}`,
-      });
+      const res = await api.getTracks();
 
       if (res.errorMessage) {
         return dispatch(fetchTracksError(res.errorMessage));
@@ -159,9 +157,6 @@ export function playTrack({ trackId, lat, long, agent }) {
           lat: lat,
           long: long,
           agent: agent,
-        },
-        headers: {
-          Authorization: `Bearer ${userToken}`,
         },
       });
 

@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import { string, array, arrayOf, oneOf } from "prop-types";
-import cn from "clsx";
 
 import { Bar } from "react-chartjs-2";
 
@@ -64,6 +63,7 @@ function BarChart({ title, axis, labels, values, classes }) {
       setBackgroundColors(colors[0]);
       setBorderColors(colors[1]);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const data = {
