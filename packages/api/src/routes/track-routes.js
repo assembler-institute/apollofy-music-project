@@ -1,7 +1,11 @@
 const Router = require("express").Router;
 
 const { authMiddleware } = require("../middlewares");
-const { trackController, trackPlaybackController } = require("../controllers");
+const {
+  trackController,
+  trackPlaybackController,
+  genreStatsController,
+} = require("../controllers");
 
 const trackRouter = Router();
 
@@ -11,6 +15,8 @@ trackRouter.get("/tracks/:id", authMiddleware, trackController.fetchTrackById);
 trackRouter.post(
   "/tracks/:id/playback",
   authMiddleware,
+  genreStatsController.extractGenres,
+  genreStatsController.addGenresStats,
   trackPlaybackController.addPlayback,
 );
 
