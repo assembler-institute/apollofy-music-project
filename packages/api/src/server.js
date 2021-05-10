@@ -11,6 +11,7 @@ const {
   trackRouter,
   playlistRouter,
   genreRouter,
+  statsRouter,
 } = require("./routes");
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(userRouter);
 app.use(trackRouter);
 app.use(playlistRouter);
 app.use(genreRouter);
+app.use(statsRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send({
