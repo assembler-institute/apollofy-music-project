@@ -1,5 +1,14 @@
 import axios from "axios";
 
+const axiosInstance = axios;
+
+export function updateAxiosHeaders(headers) {
+  axiosInstance.defaults.headers.common = {
+    ...axios.defaults.headers.common,
+    ...headers,
+  };
+}
+
 export function createDefaultResponse() {
   return {
     isSuccessful: false,
@@ -23,7 +32,7 @@ export async function normalizeResponse(promise = Promise.resolve) {
 }
 
 export function makeRequest(
-  httpClient = axios,
+  httpClient = axiosInstance,
   baseURL = process.env.REACT_APP_API_BASE_URL,
   baseHeaders = {
     Accept: "application/json",
