@@ -35,6 +35,46 @@ function makeApi(request = makeRequest()) {
     });
   }
 
+  function getTracksStats(headers) {
+    return request({
+      url: "/stats/tracks",
+      requestMethod: "GET",
+      headers: headers,
+    });
+  }
+
+  function getTrackStats({ trackId, headers }) {
+    return request({
+      url: `/stats/tracks/${trackId}`,
+      requestMethod: "GET",
+      headers: headers,
+    });
+  }
+
+  function getTracksPlaybacks(headers) {
+    return request({
+      url: "/stats/tracks/playbacks",
+      requestMethod: "GET",
+      headers: headers,
+    });
+  }
+
+  function getTrackPlaybacks({ trackId, headers }) {
+    return request({
+      url: `/stats/tracks/${trackId}/playbacks`,
+      requestMethod: "GET",
+      headers: headers,
+    });
+  }
+
+  function getGenresStats(headers) {
+    return request({
+      url: "/stats/genres",
+      requestMethod: "GET",
+      headers: headers,
+    });
+  }
+
   function getGenres(headers) {
     return request({
       url: "/genres",
@@ -177,6 +217,12 @@ function makeApi(request = makeRequest()) {
     signUp: signUp,
     signOut: signOut,
     search: search,
+    addTrackPlayback: addTrackPlayback,
+    getTracksPlaybacks: getTracksPlaybacks,
+    getTrackPlaybacks: getTrackPlaybacks,
+    getTracksStats: getTracksStats,
+    getTrackStats: getTrackStats,
+    getGenresStats: getGenresStats,
     getGenres: getGenres,
     getUserById: getUserById,
     getUsers: getUsers,
@@ -193,7 +239,6 @@ function makeApi(request = makeRequest()) {
     getTracks: getTracks,
     getPopularTracks: getPopularTracks,
     getRecommendedTracks: getRecommendedTracks,
-    addTrackPlayback: addTrackPlayback,
   };
 }
 
