@@ -9,7 +9,7 @@ const GenreStatisticsSchema = Schema(
           type: Date,
           default: Date.now,
         },
-        track: {
+        genre: {
           type: Schema.Types.ObjectId,
           ref: "genre",
         },
