@@ -63,30 +63,40 @@ async function addPlayback(req, res, next) {
         });
       }
 
-      const currMonth = currDate.toISOString().substring(0, 7);
-      const dailyKey = `daily.${currDate.getUTCDate()}`;
+      // eslint-disable-next-line no-unused-vars
+      const currYear = currDate.getUTCFullYear();
+      const monthKey = `${currDate.getUTCMonth() + 1}`;
+      const dailyKey = `${currDate.getUTCDate()}`;
 
-      dbResponse = await TrackPlaybackRepo.findOneMonthlyAndUpdate({
-        query: {
-          "metadata.track": trackId,
-          "metadata.date": currMonth,
-        },
-        dailyKey: dailyKey,
+      dbResponse = await TrackPlaybackRepo.findOneStats({
+        "metadata.track": trackId,
+        "metadata.date": currYear,
       });
 
-      if (dbResponse.error) {
-        res.status(400).send({
-          data: null,
-          error: dbResponse.error,
-        });
-      }
-
-      if (!dbResponse.data) {
-        dbResponse = await TrackPlaybackRepo.createMonthly({
-          trackId: trackId,
-          currMonth: currMonth,
-          dailyKey: dailyKey,
-        });
+      if (!dbResponse.error) {
+        if (dbResponse.data) {
+          const monthValue =
+            dbResponse.data.playbacks.monthly[monthKey].totalPlaybacks + 1;
+          const dailyValue =
+            dbResponse.data.playbacks.monthly[monthKey].daily[dailyKey] + 1;
+          dbResponse = await TrackPlaybackRepo.updateOneStats({
+            query: {
+              "metadata.track": trackId,
+              "metadata.date": currYear,
+            },
+            monthKey: monthKey,
+            monthValue: monthValue,
+            dailyKey: dailyKey,
+            dailyValue: dailyValue,
+          });
+        } else {
+          dbResponse = await TrackPlaybackRepo.createStat({
+            trackId: trackId,
+            currYear: currYear,
+            monthKey: monthKey,
+            dailyKey: dailyKey,
+          });
+        }
       }
     }
     handleDbResponse(res, dbResponse);
@@ -99,7 +109,7 @@ async function fetchPlaybacks(req, res, next) {
   const { params } = req;
 
   try {
-    const dbResponse = await TrackPlaybackRepo.findDaily(params);
+    const dbResponse = await TrackPlaybackRepo.find(params);
     handleDbResponse(res, dbResponse);
   } catch (error) {
     next(error);
@@ -121,24 +131,24 @@ async function fetchById(req, res, next) {
   }
 }
 
-async function fetchMonthlyPlaybacks(req, res, next) {
+async function fetchStats(req, res, next) {
   const { params } = req;
 
   try {
-    const dbResponse = await TrackPlaybackRepo.findMonthly(params);
+    const dbResponse = await TrackPlaybackRepo.findStats(params);
     handleDbResponse(res, dbResponse);
   } catch (error) {
     next(error);
   }
 }
 
-async function fetchMonthlyById(req, res, next) {
+async function fetchStatsById(req, res, next) {
   const {
     params: { id },
   } = req;
 
   try {
-    const dbResponse = await TrackPlaybackRepo.findOneMonthly({
+    const dbResponse = await TrackPlaybackRepo.findOneStats({
       id: id,
     });
     handleDbResponse(res, dbResponse);
@@ -151,6 +161,6 @@ module.exports = {
   addPlayback: addPlayback,
   fetchPlaybacks: fetchPlaybacks,
   fetchById: fetchById,
-  fetchMonthlyPlaybacks: fetchMonthlyPlaybacks,
-  fetchMonthlyById: fetchMonthlyById,
+  fetchStats: fetchStats,
+  fetchStatsById: fetchStatsById,
 };
