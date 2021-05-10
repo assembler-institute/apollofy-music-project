@@ -68,26 +68,6 @@ class TrackPlaybackRepository {
     );
   }
 
-  findOneStatsAndUpdate({ query, monthKey, dailyKey }) {
-    return normalizeDBQuery(
-      db.TrackStatistics.findOneAndUpdate(query, {
-        $inc: {
-          totalPlaybacks: 1,
-          playbacks: {
-            monthly: {
-              [monthKey]: {
-                totalPlaybacks: 1,
-                daily: {
-                  [dailyKey]: 1,
-                },
-              },
-            },
-          },
-        },
-      }),
-    );
-  }
-
   find(query) {
     return normalizeDBQuery(db.TrackPlayback.find(query, "-__v"));
   }
