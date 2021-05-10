@@ -26,15 +26,24 @@ class TrackPlaybackRepository {
     );
   }
 
-  createMonthly(options) {
+  createStat(options) {
     return normalizeDBQuery(
-      db.MonthlyTrackPlayback.create({
+      db.TrackStatistics.create({
         metadata: {
           track: options.trackId,
-          date: options.currMonth,
+          date: options.currYear,
         },
-        totalPlaybacks: 0,
-        [options.dailyKey]: 1,
+        totalPlaybacks: 1,
+        playbacks: {
+          monthly: {
+            [options.monthKey]: {
+              totalPlaybacks: 1,
+              daily: {
+                [options.dailyKey]: 1,
+              },
+            },
+          },
+        },
       }),
     );
   }
@@ -59,31 +68,64 @@ class TrackPlaybackRepository {
     );
   }
 
-  findOneMonthlyAndUpdate({ query, dailyKey }) {
+  findOneStatsAndUpdate({ query, monthKey, dailyKey }) {
     return normalizeDBQuery(
-      db.MonthlyTrackPlayback.findOneAndUpdate(query, {
+      db.TrackStatistics.findOneAndUpdate(query, {
         $inc: {
           totalPlaybacks: 1,
-          [dailyKey]: 1,
+          playbacks: {
+            monthly: {
+              [monthKey]: {
+                totalPlaybacks: 1,
+                daily: {
+                  [dailyKey]: 1,
+                },
+              },
+            },
+          },
         },
       }),
     );
   }
 
   find(query) {
-    return normalizeDBQuery(db.DailyTrackPlayback.find(query, "-__v"));
+    return normalizeDBQuery(db.TrackPlayback.find(query, "-__v"));
   }
 
   findOne(query) {
-    return normalizeDBQuery(db.DailyTrackPlayback.findOne(query, "-__v"));
+    return normalizeDBQuery(db.TrackPlayback.findOne(query, "-__v"));
   }
 
-  findMonthly(query) {
-    return normalizeDBQuery(db.MonthlyTrackPlayback.find(query, "-__v"));
+  findStats(query) {
+    return normalizeDBQuery(db.TrackStatistics.find(query, "-__v"));
   }
 
-  findOneMonthly(query) {
-    return normalizeDBQuery(db.MonthlyTrackPlayback.findOne(query, "-__v"));
+  findOneStats(query) {
+    return normalizeDBQuery(db.TrackStatistics.findOne(query, "-__v"));
+  }
+
+  updateOne(queryFilter, queryData) {
+    return normalizeDBQuery(db.TrackPlayback.updateOne(queryFilter, queryData));
+  }
+
+  updateOneStats({ queryFilter, monthKey, monthValue, dailyKey, dailyValue }) {
+    return normalizeDBQuery(
+      db.TrackStatistics.updateOne(queryFilter, {
+        $inc: {
+          totalPlaybacks: 1,
+        },
+        $set: {
+          playbacks: {
+            monthly: {
+              [monthKey]: {
+                totalPlaybacks: monthValue,
+                daily: { [dailyKey]: dailyValue },
+              },
+            },
+          },
+        },
+      }),
+    );
   }
 }
 
