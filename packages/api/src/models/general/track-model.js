@@ -30,9 +30,14 @@ const TrackSchema = Schema(
       type: String,
       trim: true,
     },
-    genre: {
-      type: Schema.Types.ObjectId,
-      ref: "genre",
+    genres: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "genre",
+        },
+      ],
+      default: [],
     },
     author: {
       type: Schema.Types.ObjectId,
