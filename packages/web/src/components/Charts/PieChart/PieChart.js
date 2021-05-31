@@ -62,7 +62,8 @@ function PieChart({ title, axis, labels, showLabels, values, classes }) {
       setBackgroundColors(colors[0]);
       setBorderColors(colors[1]);
     });
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const data = {
     labels: labels,
