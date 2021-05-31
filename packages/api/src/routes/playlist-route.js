@@ -5,26 +5,14 @@ const { playlistController } = require("../controllers");
 
 const playlistRouter = Router();
 
-playlistRouter.post(
-  "/playlists",
-  authMiddleware,
-  playlistController.createPlaylist,
-);
+playlistRouter.post("/", authMiddleware, playlistController.createPlaylist);
 
-playlistRouter.put(
-  "/playlists",
-  authMiddleware,
-  playlistController.updatePlaylist,
-);
+playlistRouter.put("/", authMiddleware, playlistController.updatePlaylist);
+
+playlistRouter.get("/", authMiddleware, playlistController.fetchPlaylists);
 
 playlistRouter.get(
-  "/playlists",
-  authMiddleware,
-  playlistController.fetchPlaylists,
-);
-
-playlistRouter.get(
-  "/playlists/:id",
+  "/:id",
   authMiddleware,
   playlistController.fetchPlaylistById,
 );

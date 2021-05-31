@@ -9,16 +9,16 @@ const {
 
 const trackRouter = Router();
 
-trackRouter.post("/tracks", authMiddleware, trackController.createTrack);
-trackRouter.get("/tracks", authMiddleware, trackController.fetchTracks);
-trackRouter.get("/tracks/:id", authMiddleware, trackController.fetchTrackById);
+trackRouter.post("/", authMiddleware, trackController.createTrack);
+trackRouter.get("/", authMiddleware, trackController.fetchTracks);
 trackRouter.post(
-  "/tracks/:id/playback",
+  "/:id/playback",
   authMiddleware,
   genreStatsController.extractGenres,
   genreStatsController.addGenresStats,
   trackPlaybackController.addPlayback,
 );
+trackRouter.get("/:id", authMiddleware, trackController.fetchTrackById);
 
 module.exports = {
   trackRouter: trackRouter,

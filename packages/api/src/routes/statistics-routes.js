@@ -7,17 +7,12 @@ const { trackPlaybackController } = require("../controllers");
 const statsRouter = Router();
 
 statsRouter.get(
-  "/stats/tracks/playbacks",
+  "/tracks/playbacks",
   authMiddleware,
   trackPlaybackController.fetchPlaybacks,
 );
 
-statsRouter.get(
-  "/stats/tracks/",
-  authMiddleware,
-  trackPlaybackController.fetchStats,
-);
-
+statsRouter.get("/tracks/", authMiddleware, trackPlaybackController.fetchStats);
 
 module.exports = {
   statsRouter: statsRouter,

@@ -5,14 +5,10 @@ const { genreController } = require("../controllers");
 
 const genreRouter = Router();
 
-genreRouter.post("/genres", authMiddleware, genreController.createGenre);
-genreRouter.get("/genres", authMiddleware, genreController.fetchGenres);
+genreRouter.get("/:name", authMiddleware, genreController.fetchGenreByName);
+genreRouter.post("/", authMiddleware, genreController.createGenre);
+genreRouter.get("/", authMiddleware, genreController.fetchGenres);
 //genreRouter.get("/genres/:id", authMiddleware, genreController.fetchGenreById);
-genreRouter.get(
-  "/genres/:name",
-  authMiddleware,
-  genreController.fetchGenreByName,
-);
 
 module.exports = {
   genreRouter: genreRouter,
