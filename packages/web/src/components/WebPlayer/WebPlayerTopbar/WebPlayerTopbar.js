@@ -4,11 +4,11 @@ import cn from "clsx";
 
 import "./WebPlayerTopbar.scss";
 
-import Button from "../Button/Button";
-import Next from "../ButtonIcons/Next/Next";
-import Prev from "../ButtonIcons/Prev/Prev";
-import SearchInput from "../SearchInput/SearchInput";
-import Dropdown from "../Dropdown/Dropdown";
+import Button from "../../Button/Button";
+import Next from "../../ButtonIcons/Next/Next";
+import Prev from "../../ButtonIcons/Prev/Prev";
+import SearchInput from "../../SearchInput/SearchInput";
+import Dropdown from "../../Dropdown/Dropdown";
 
 function WebPlayerTopbar({ username, thumbnail, extra, selected }) {
   const playlistsClassNames = cn({

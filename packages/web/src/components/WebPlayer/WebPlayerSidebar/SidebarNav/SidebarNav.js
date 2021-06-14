@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 import "./SidebarNav.scss";
 
-import Logo from "../../Logo/Logo";
+import Logo from "../../../Logo/Logo";
 import NavHomeButton from "./NavHomeButton";
 import NavSearchButton from "./NavSearchButton";
 import NavLibraryButton from "./NavLibraryButton";
-import * as ROUTES from "../../../routes";
+import * as ROUTES from "../../../../routes";
 
 function SidebarNav() {
   return (
     <nav className="SidebarNav">
-      <Link to={ROUTES.WEB_PLAYER_HOME}>
+      <Link to={ROUTES.HOME}>
         <Logo aria-label="app logo" />
       </Link>
       <ul className="SidebarNav__list">
@@ -29,6 +29,11 @@ function SidebarNav() {
         <li className="SidebarNav__list-item" aria-label="your library">
           <Link to={ROUTES.WEB_PLAYER_LIBRARY}>
             <NavLibraryButton>Your library</NavLibraryButton>
+          </Link>
+        </li>
+        <li className="SidebarNav__list-item" aria-label="statistics">
+          <Link to={ROUTES.WEB_PLAYER_STATS}>
+            <NavLibraryButton>Statistics</NavLibraryButton>
           </Link>
         </li>
       </ul>

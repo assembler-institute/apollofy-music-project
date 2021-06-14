@@ -1,14 +1,14 @@
 import React from "react";
 
-import "./SidebarPlaylists.scss";
+import { Container } from "../../../Layout";
 
 import PlaylistsHeader from "./PlaylistsHeader";
 
 function SidebarPlaylists() {
   return (
-    <section className="SidebarPlaylists">
+    <Container classes={["pr-6 pl-6 pt-6"]}>
       <PlaylistsHeader>playlists</PlaylistsHeader>
-    </section>
+    </Container>
   );
 }
 
