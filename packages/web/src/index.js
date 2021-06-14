@@ -12,9 +12,9 @@ import store, { persistor } from "./redux/store";
 import App from "./App";
 import "./styles/tailwind.css";
 
-import messagesEN from "./translations/en.json";
-import messagesES from "./translations/es.json";
-import messagesCAT from "./translations/ca.json";
+import messagesEN from "./utils/translations/en.json";
+import messagesES from "./utils/translations/es.json";
+import messagesCAT from "./utils/translations/ca.json";
 
 const messages = {
   en: messagesEN,

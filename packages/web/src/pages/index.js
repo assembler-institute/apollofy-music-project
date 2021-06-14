@@ -6,6 +6,7 @@ import UploadSong from "./UploadSong";
 import UploadImage from "./UploadImage";
 import UploadPlayback from "./UploadPlayback";
 import CreatePlaylist from "./CreatePlaylist";
+import WebPlayer from "./WebPlayer";
 import WebPlayerHome from "./WebPlayerHome";
 import WebPlayerLibrary from "./WebPlayerLibrary";
 import WebPlayerSearch from "./WebPlayerSearch";
@@ -13,6 +14,7 @@ import WebPlayerPlaylist from "./WebPlayerPlaylist";
 import WebPlayerStats from "./WebPlayerStats";
 
 export {
+  WebPlayer,
   Home,
   SignUp,
   Login,
