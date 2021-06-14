@@ -7,33 +7,40 @@ import "./FormInput.scss";
 function FormInput({
   id,
   title,
+  name,
   type,
   placeholder,
-  isRequired,
   value,
   onChange,
+  darkMode,
   textError,
 }) {
-  const inputClassNames = cn(
+  const inputStyle = cn(
     {
       [`border-radius`]: true,
     },
     "FormInput__input",
   );
 
+  const labelStyle = cn(
+    {
+      [`text-white`]: darkMode,
+    },
+    "FormInput__label",
+  );
+
   return (
     <div className="FormInput">
       <div className="FormInput__label-wrapper">
-        <label className="FormInput__label" htmlFor={id}>
+        <label className={labelStyle} htmlFor={id}>
           {title}
         </label>
       </div>
       <input
-        className={inputClassNames}
+        className={inputStyle}
         type={type}
         id={id}
-        name={id}
-        required={isRequired}
+        name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -48,10 +55,11 @@ function FormInput({
 FormInput.propTypes = {
   id: string.isRequired,
   title: string,
+  name: string,
   placeholder: string,
-  isRequired: bool,
   value: string,
   onChange: func,
+  darkMode: bool,
   textError: string,
   type: oneOf([
     "text",
@@ -73,9 +81,10 @@ FormInput.propTypes = {
 
 FormInput.defaultProps = {
   title: "",
+  name: "",
   placeholder: "Enter any text...",
-  isRequired: false,
   value: "",
+  darkMode: false,
   textError: "",
   onChange: (_) => {},
 };
