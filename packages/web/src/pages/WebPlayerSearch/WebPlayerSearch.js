@@ -2,26 +2,15 @@ import React from "react";
 
 import "./WebPlayerSearch.scss";
 
-import {
-  WebPlayerFooter,
-  WebPlayerLayout,
-  WebPlayerMainContainer,
-} from "../../components/WebPlayerLayout";
+import { Container, Column, Row } from "../../components/Layout";
 
-import WebPlayerSidebar from "../../components/WebPlayerSidebar/WebPlayerSidebar";
-import WebPlayerMainView from "../../components/WebPlayerMainView/WebPlayerMainView";
+import WebPlayer from "../WebPlayer";
 
 function WebPlayerSearch() {
   return (
-    <WebPlayerLayout>
-      <WebPlayerMainContainer>
-        <WebPlayerSidebar />
-        <WebPlayerMainView>
-          <h1>Search</h1>
-        </WebPlayerMainView>
-      </WebPlayerMainContainer>
-      <WebPlayerFooter />
-    </WebPlayerLayout>
+    <WebPlayer>
+      <Container>edui</Container>
+    </WebPlayer>
   );
 }
 
