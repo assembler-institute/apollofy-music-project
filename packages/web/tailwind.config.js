@@ -5,6 +5,33 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   theme: {
     extend: {},
+    zIndex: {
+      DEFAULT: 0,
+      "-1": -1,
+      0: 0,
+      10: 10,
+      20: 20,
+      30: 30,
+      40: 40,
+      50: 50,
+      auto: "auto",
+    },
+    flexGrow: {
+      DEFAULT: 0,
+      0: 0,
+      1: 1,
+      2: 2,
+      3: 3,
+      4: 4,
+    },
+    flexShrink: {
+      DEFAULT: 1,
+      0: 0,
+      1: 1,
+      2: 2,
+      3: 3,
+      4: 4,
+    },
     colors: {
       ...colors,
       gray: colors.trueGray,
