@@ -1,0 +1,22 @@
+.FormTextArea {
+  @apply relative w-full box-border;
+
+  &__label-wrapper {
+    @apply w-full flex items-center pb-1;
+  }
+  &__label {
+    @apply font-medium text-base leading-normal;
+  }
+  &__input {
+    @apply block w-full p-2 box-border rounded-md font-normal;
+    border: 1px solid rgb(189, 189, 189);
+    color: rgb(24, 24, 24);
+    resize: none;
+  }
+  &__input:focus {
+    border: 1px solid #0057ff;
+    outline: none;
+    box-shadow: none;
+    resize: none;
+  }
+}
