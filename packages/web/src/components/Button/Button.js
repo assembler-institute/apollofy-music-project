@@ -20,6 +20,7 @@ function Button({ type, variant, handleClick, classes, children, ...props }) {
       /** @see https://github.com/yannickcr/eslint-plugin-react/issues/1846#issuecomment-614921516 */
       /* eslint-disable-next-line react/button-has-type */
       type={type}
+      onClick={handleClick}
       {...props}
     >
       {children}

@@ -1,7 +1,7 @@
 $minimumColumnWidth: 180px;
 
 .CardPanel {
-  @apply w-full rounded-md flex flex-col p-4 box-border;
+  @apply w-full rounded-md flex flex-col box-border;
   min-height: 300px;
 
   &__wrapper {
