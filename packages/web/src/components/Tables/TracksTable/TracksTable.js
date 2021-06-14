@@ -1,18 +1,28 @@
 import React from "react";
-import { string, number, oneOf, shape, arrayOf, func } from "prop-types";
+import { string, number, oneOf, shape, arrayOf, func, bool } from "prop-types";
 
-import TableHeader from "../TableHeader/TableHeader";
-import TableRow from "../TableRow/TableRow";
-import "./Table.scss";
+import TableHeader from "./TableHeader";
+import TableRow from "./TableRow";
 
-function Table({ type, items, handleClick }) {
+function TracksTable({
+  type,
+  headers,
+  tracks,
+  showIndex,
+  isExpanded,
+  handleClick,
+}) {
+  // eslint-disable-next-line no-console
+  console.log("TRACKS RECEIVED");
+  // eslint-disable-next-line no-console
+  console.log(tracks);
   return (
     <div className="Table__Wrapper">
       <div className="Table__Header">
         <TableHeader isExpanded={type !== "list"} />
       </div>
       <div className="">
-        {items.map((item, i) => {
+        {tracks.map((item, i) => {
           return (
             <TableRow
               key={item.id}
@@ -29,9 +39,12 @@ function Table({ type, items, handleClick }) {
   );
 }
 
-Table.propTypes = {
+TracksTable.propTypes = {
   type: oneOf(["list", "playlist", "album"]),
-  items: arrayOf(
+  headers: arrayOf(string),
+  showIndex: bool,
+  isExpanded: bool,
+  tracks: arrayOf(
     shape({
       id: number,
       name: string,
@@ -47,10 +60,13 @@ Table.propTypes = {
   handleClick: func,
 };
 
-Table.defaultProps = {
+TracksTable.defaultProps = {
   type: "list",
-  items: [],
+  headers: [],
+  tracks: [],
+  showIndex: false,
+  isExpanded: false,
   handleClick: () => {},
 };
 
-export default Table;
+export default TracksTable;

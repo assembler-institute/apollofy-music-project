@@ -2,17 +2,18 @@ import React from "react";
 import { string, number, oneOf, shape, func } from "prop-types";
 import cn from "clsx";
 
-import { formatDuration } from "../../utils/utils";
+import { formatDuration } from "../../../../utils/utils";
 
-import PlayButton from "../ButtonIcons/Play/Play";
-import HeartIcon from "../SmallIcons/HeartIcon/HeartIcon";
-import DotsIcon from "../SmallIcons/DotsIcon/DotsIcon";
+import PlayButton from "../../../ButtonIcons/Play/Play";
+import HeartIcon from "../../../SmallIcons/HeartIcon/HeartIcon";
+import DotsIcon from "../../../SmallIcons/DotsIcon/DotsIcon";
 
 import "./TableRow.scss";
 
 function TableRow({
+  key,
   index,
-  item: { name, owner, duration, likes, plays, thumbnail } = {},
+  item: { title, owner, duration, likes, plays, thumbnail } = {},
   parentName,
   type,
   onClick,
@@ -22,8 +23,15 @@ function TableRow({
     type === "list" ? "SimpleGrid" : "ExpandedGrid",
   );
 
+  // eslint-disable-next-line no-console
+  console.log("\n");
+  // eslint-disable-next-line no-console
+  console.log(title, owner, duration, likes, plays, thumbnail);
+  // eslint-disable-next-line no-console
+  console.log("\n");
   return (
     <div
+      id={key}
       role="button"
       className="TableRow"
       onDoubleClick={onClick}
@@ -49,8 +57,10 @@ function TableRow({
             />
           </div>
           <div className="ml-4">
-            <div className="text-sm font-medium text-white">{name}</div>
-            <div className="text-sm text-gray-500">{owner.login}</div>
+            <div className="text-sm font-medium text-white">{title}</div>
+            {owner && (
+              <div className="text-sm text-gray-500">{owner.login}</div>
+            )}
           </div>
         </div>
         {type !== "list" && (
@@ -76,6 +86,7 @@ function TableRow({
 }
 
 TableRow.propTypes = {
+  key: string.isRequired,
   index: number,
   item: shape({
     name: string,

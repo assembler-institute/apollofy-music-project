@@ -3,11 +3,12 @@
   margin-bottom: 1rem;
 
   &__Wrapper {
-    @apply relative pl-4 pr-4 rounded-sm border-4 border-solid border-transparent;
+    @apply relative pl-4 pr-4 rounded-sm border-4 border-solid;
     display: grid;
     height: 56px;
     grid-gap: 16px;
     border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+    border-color: transparent;
   }
 
   &__Leading {

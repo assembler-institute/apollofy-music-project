@@ -2,7 +2,7 @@
   @apply relative box-border;
 
   &__Wrapper {
-    @apply relative grid pl-4 pr-4 rounded-sm border-4 border-solid;
+    @apply relative grid pl-4 pr-4 rounded-sm border border-solid;
     height: 56px;
     grid-gap: 16px;
   }
