@@ -79,7 +79,13 @@ export const fetchPlaylistSuccess = (playlist) => ({
   payload: playlist,
 });
 
-export function createPlaylist({ title, type, thumbnail, publicAccessible }) {
+export function createPlaylist({
+  title,
+  description,
+  type,
+  thumbnail,
+  publicAccessible,
+}) {
   return async function createThunk(dispatch) {
     dispatch(playlistCreateRequest());
 
@@ -93,6 +99,7 @@ export function createPlaylist({ title, type, thumbnail, publicAccessible }) {
       const res = await api.createPlaylist({
         body: {
           title: title,
+          description: description,
           type: type,
           thumbnail: thumbnail,
           publicAccessible: publicAccessible,

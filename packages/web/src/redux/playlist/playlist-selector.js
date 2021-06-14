@@ -9,9 +9,14 @@ export const playlistItemSelector = (props) => {
   return useSelector((state) => state.playlists.byID[props.id]);
 };
 
+export const playlistTrackSelector = (props) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  return useSelector((state) => state.playlists.trackByID[props.id]);
+};
+
 export const playlistsSelector = createSelector(
   [selectPlaylists],
-  (playlistsIDS) => playlistsIDS,
+  (ids) => ids,
 );
 
 export const playlistStateSelector = createSelector(

@@ -13,9 +13,9 @@ export const PlaylistInitState = {
   playlistLoading: false,
   playlistLoadingError: null,
   playlistFetched: false,
-  playlistByID: {},
+  byID: {},
   trackByID: {},
-  playlistIds: {
+  ids: {
     ALL: [],
     OWN: [],
     FOLLOWING: [],
@@ -86,9 +86,9 @@ const PlaylistReducer = (state = PlaylistInitState, action) => {
     }
     case PlaylistType.FETCH_PLAYLISTS_SUCCESS: {
       const actionType = action.payload.type;
-      const newIds = { ...state.playlistIds };
+      const newIds = { ...state.ids };
       newIds[actionType] = [
-        ...state.playlistIds[actionType],
+        ...state.ids[actionType],
         ...action.payload.playlistIds,
       ];
 
@@ -97,15 +97,15 @@ const PlaylistReducer = (state = PlaylistInitState, action) => {
         playlistsLoading: false,
         playlistsLoadingError: null,
         playlistsFetched: true,
-        playlistByID: {
-          ...state.playlistByID,
+        byID: {
+          ...state.byID,
           ...action.payload.playlistByID,
         },
         trackByID: {
           ...state.trackByID,
           ...action.payload.trackByID,
         },
-        playlistIds: newIds,
+        ids: newIds,
       };
     }
     case PlaylistType.FETCH_PLAYLIST_REQUEST: {
@@ -130,8 +130,8 @@ const PlaylistReducer = (state = PlaylistInitState, action) => {
         playlistLoading: false,
         playlistLoadingError: null,
         playlistFetched: true,
-        playlistByID: {
-          ...state.playlistByID,
+        byID: {
+          ...state.byID,
           [playlistID]: {
             ...action.payload.data,
           },
