@@ -1,0 +1,30 @@
+.Modal {
+  position: absolute;
+  max-width: 600px;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-30%, -50%);
+  @apply w-auto h-auto bg-dark-dark rounded-md;
+
+  &__content {
+    @apply w-full h-full bg-dark flex flex-col items-center justify-start p-8 border-2 border-primary rounded-md;
+    min-width: 400px;
+  }
+
+  &__header {
+    @apply w-full flex flex-row justify-between items-center;
+  }
+
+  &__body {
+    @apply w-full h-full flex flex-col;
+  }
+
+  &__title {
+    @apply text-xl font-bold;
+  }
+
+  &__footer {
+  }
+}
