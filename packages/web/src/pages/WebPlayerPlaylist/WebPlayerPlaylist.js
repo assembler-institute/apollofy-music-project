@@ -9,62 +9,45 @@ import "./WebPlayerPlaylist.scss";
 
 import * as ROUTES from "../../routes";
 
-import {
-  WebPlayerFooter,
-  WebPlayerLayout,
-  WebPlayerMainContainer,
-} from "../../components/WebPlayerLayout";
+import { Container, Column, Row } from "../../components/Layout";
 
-import { playlistItemSelector } from "../../redux/playlist/playlist-selector";
+import WebPlayer from "../WebPlayer";
+import { TracksTable } from "../../components/Tables";
+
+import {
+  playlistItemSelector,
+  playlistTrackSelector,
+} from "../../redux/playlist/playlist-selector";
 import { authSelector } from "../../redux/auth/auth-selectors";
 
-import { fetchAllPlaylists } from "../../redux/playlist/playlist-actions";
-
-import WebPlayerSidebar from "../../components/WebPlayerSidebar/WebPlayerSidebar";
-import WebPlayerMainView from "../../components/WebPlayerMainView/WebPlayerMainView";
-
 import HomeLayout from "../../components/HomeLayout";
-import Table from "../../components/CardPanel";
-import TableRow from "../../components/TableRow";
 
 function WebPlayerPlaylist() {
   const dispatch = useDispatch();
   const { id: playlistId } = useParams();
   const playlist = playlistItemSelector({ id: playlistId });
 
-  const { isAuthenticated } = useSelector(authSelector);
+  const tracks = playlist.tracks.map((trackId) => {
+    const t = playlistTrackSelector({ id: trackId });
+    // eslint-disable-next-line no-console
+    console.log(t);
+    return t;
+  });
 
   useEffect(() => {
     //if (isAuthenticated)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  /*if (!isAuthenticated) {
-    // eslint-disable-next-line no-console
-    console.log("Not authenticated");
-    return <Redirect to={ROUTES.LOGIN} />;
-  }*/
-
-  // eslint-disable-next-line no-console
-  console.log(playlist);
-
-  const handleTrackClick = (id) => {
-    // eslint-disable-next-line no-console
-    console.log(`Track id: ${id}`);
-  };
-
   return (
-    <WebPlayerLayout>
-      <WebPlayerMainContainer>
-        <WebPlayerSidebar />
-        <WebPlayerMainView>
-          <HomeLayout>
-            <Table title={playlist.name}></Table>
-          </HomeLayout>
-        </WebPlayerMainView>
-      </WebPlayerMainContainer>
-      <WebPlayerFooter />
-    </WebPlayerLayout>
+    <WebPlayer>
+      <Container>
+        <Column fullWidth>
+          <h1 className="mb-4 font-bold text-xl">{playlist.title}</h1>
+          <TracksTable tracks={tracks} />
+        </Column>
+      </Container>
+    </WebPlayer>
   );
 }
 
