@@ -1,1 +1,1 @@
-export { default } from "./Dropzone";
+export { default, fileTypes } from "./Dropzone";

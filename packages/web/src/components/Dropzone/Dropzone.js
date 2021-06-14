@@ -1,46 +1,66 @@
 import React from "react";
-import { string, func } from "prop-types";
+import { string, func, bool, arrayOf } from "prop-types";
 import { useDropzone } from "react-dropzone";
+import cn from "clsx";
 import "./Dropzone.scss";
+
 import { fileTypes } from "../../services/cloudinary";
 
-function Dropzone({ fileType, onFileSelected }) {
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+export { fileTypes };
+
+function Dropzone({
+  fileType,
+  file,
+  error,
+  onFileSelected,
+  darkMode,
+  classes,
+}) {
+  const { getRootProps, getInputProps } = useDropzone({
     accept: fileType === fileTypes.AUDIO ? "audio/*" : "image/*",
     maxFiles: 1,
     onDropAccepted: onFileSelected,
   });
-  // eslint-disable-next-line no-unused-vars
-  const files = acceptedFiles.map((file) => (
-    <li key={file.path}>{file.path}</li>
-  ));
+
+  const dropZoneStyle = cn(
+    {
+      [`p-4 border-2 rounded-md  border-dashed outline-none`]: true,
+      [`bg-dark border-dark-light`]: darkMode,
+      [`bg-light border-light-light`]: !darkMode,
+    },
+    ...classes,
+  );
+
+  const fileComponent = <li key={file.path}>{file.path}</li>;
 
   return (
-    <div>
-      <section className=" mt-4 p-4 border-2 rounded-md bg-dark border-dark-light border-dashed outline-none">
-        <div
-          {...getRootProps({ className: "dropzone" })}
-          className="flex flex-col items-center p-4"
-        >
-          <input {...getInputProps()} />
-          <p>Drag n drop some files here, or click to select files</p>
-        </div>
-      </section>
-      <aside className="my-2">
-        <h4 className="text-dark font-bold">Files</h4>
-        <ul className="text-dark">{files}</ul>
-      </aside>
-    </div>
+    <section className={dropZoneStyle}>
+      <div
+        {...getRootProps({ className: "dropzone" })}
+        className="flex flex-col items-center p-4"
+      >
+        <input {...getInputProps()} />
+        <p>Drag n drop some files here, or click to select files</p>
+      </div>
+    </section>
   );
 }
 
 Dropzone.propTypes = {
   fileType: string.isRequired,
+  file: string,
+  error: string,
   onFileSelected: func,
+  darkMode: bool,
+  classes: arrayOf(string),
 };
 
 Dropzone.defaultProps = {
   onFileSelected: (_) => {},
+  file: null,
+  error: null,
+  darkMode: false,
+  classes: [],
 };
 
 export default Dropzone;
