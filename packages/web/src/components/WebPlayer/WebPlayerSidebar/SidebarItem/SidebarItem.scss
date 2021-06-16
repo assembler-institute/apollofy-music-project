@@ -1,0 +1,29 @@
+.SidebarItem {
+  display: flex;
+  flex-direction: column;
+
+  &__btn {
+    width: 100%;
+    @apply flex text-gray-300 hover:text-white text-sm;
+
+    align-items: center;
+
+    &-icon {
+      fill: none;
+      stroke: currentColor;
+
+      &-wrapper {
+        @apply pl-4;
+        @apply pr-3;
+      }
+
+      &--active {
+        fill: white;
+      }
+
+      &--stroke {
+        stroke-width: 2;
+      }
+    }
+  }
+}
