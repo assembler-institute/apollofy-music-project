@@ -1,3 +1,4 @@
 import PlaylistCreateModal from "./PlaylistCreateModal";
+import TrackCreateModal from "./TrackCreateModal";
 
-export { PlaylistCreateModal };
+export { PlaylistCreateModal, TrackCreateModal };
