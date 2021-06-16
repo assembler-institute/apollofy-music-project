@@ -1,13 +1,21 @@
 import React from "react";
-import { string, node, func, arrayOf, oneOf } from "prop-types";
+import { string, node, func, arrayOf, oneOf, bool } from "prop-types";
 import cn from "clsx";
 
 import "./Button.scss";
 
-function Button({ type, variant, handleClick, classes, children, ...props }) {
+function Button({
+  type,
+  variant,
+  handleClick,
+  roundedBorders,
+  classes,
+  children,
+  ...props
+}) {
   const classNames = cn(
     {
-      [`border-radius`]: true,
+      [`border-radius`]: roundedBorders,
       [`btn`]: true,
       [`btn-${variant}`]: true,
     },
@@ -30,6 +38,7 @@ function Button({ type, variant, handleClick, classes, children, ...props }) {
 
 Button.propTypes = {
   handleClick: func,
+  roundedBorders: bool,
   children: node.isRequired,
   classes: arrayOf(string),
   type: oneOf(["button", "submit"]),
@@ -37,6 +46,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  roundedBorders: false,
   handleClick: null,
   classes: [],
   type: "submit",
