@@ -31,7 +31,13 @@ export const uploadImageSuccess = (imageUrl) => ({
   payload: imageUrl,
 });
 
-export function uploadSong({ track, title }) {
+export function uploadSong({
+  title,
+  track,
+  thumbnailFile,
+  thumbnailUrl,
+  genre,
+}) {
   return async function uploadThunk(dispatch) {
     dispatch(uploadSongRequest());
 
@@ -53,14 +59,28 @@ export function uploadSong({ track, title }) {
 
       const { url, duration } = urlRes.data;
 
+      let thumbnail = "";
+      if (thumbnailFile) {
+        const thumbnailRes = await getFileUrl({
+          file: thumbnailFile,
+          fileType: fileTypes.IMAGE,
+        });
+
+        if (thumbnailRes.status >= 400) {
+          return dispatch(uploadSongError(thumbnailRes.statusText));
+        }
+        thumbnail = thumbnailRes.data.url;
+      } else if (thumbnailUrl) {
+        thumbnail = thumbnailUrl;
+      }
+
       const songRes = await api.createTrack({
         body: {
           title: title,
           url: url,
           duration: duration,
-        },
-        headers: {
-          Authorization: `Bearer ${userToken}`,
+          thumbnail: thumbnail,
+          genres: [genre],
         },
       });
 

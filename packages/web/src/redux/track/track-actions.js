@@ -6,6 +6,20 @@ import { normalizeTracks } from "../../schema/track-schema";
 import { signOutSuccess } from "../auth/auth-actions";
 import { getCurrentUserToken } from "../../services/auth";
 
+export const createTrackRequest = () => ({
+  type: TrackTypes.CREATE_TRACK_REQUEST,
+});
+
+export const createTrackError = (message) => ({
+  type: TrackTypes.CREATE_TRACK_ERROR,
+  payload: message,
+});
+
+export const createTrackSuccess = (track) => ({
+  type: TrackTypes.CREATE_TRACK_SUCCESS,
+  payload: track,
+});
+
 export const fetchTracksRequest = () => ({
   type: TrackTypes.FETCH_TRACKS_REQUEST,
 });
@@ -138,6 +152,35 @@ export function fetchTrackById(trackID) {
       dispatch(fetchTrackSuccess(res.data));
     } else {
       dispatch(fetchTrackError(res.errorMessage));
+    }
+  };
+}
+
+export function createTrack({ title, url, thumbnail, genre }) {
+  return async function createTrackThunk(dispatch) {
+    dispatch(createTrackRequest());
+    try {
+      const userToken = await getCurrentUserToken();
+      if (!userToken) {
+        return dispatch(signOutSuccess());
+      }
+
+      const res = await api.createTrack({
+        body: {
+          title: title,
+          url: url,
+          thumbnail: thumbnail,
+          genres: [genre],
+        },
+      });
+
+      if (res.errorMessage) {
+        return dispatch(createTrackError(res.errorMessage));
+      }
+
+      return dispatch(createTrackSuccess(res.data));
+    } catch (err) {
+      return dispatch(createTrackError(err));
     }
   };
 }
