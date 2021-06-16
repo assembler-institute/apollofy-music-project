@@ -1,5 +1,5 @@
 import React from "react";
-import { string, object, func, arrayOf, oneOf, oneOfType } from "prop-types";
+import { string, object, func, arrayOf, oneOfType } from "prop-types";
 
 import { Formik } from "formik";
 import { validationSchema, initialValues } from "../../../utils/validation";
@@ -59,6 +59,7 @@ function LoginForm({ id, onSubmit, loginWithGoogle, loginError, classes }) {
                     <section className="mt-4">{loginError}</section>
                   )}
                   <Button
+                    roundedBorders
                     type="submit"
                     disabled={formikProps.isSubmitting}
                     data-testid={prefix("submit")}
@@ -70,6 +71,7 @@ function LoginForm({ id, onSubmit, loginWithGoogle, loginError, classes }) {
               </Column>
             </form>
             <Button
+              roundedBorders
               type="button"
               handleClick={loginWithGoogle}
               data-testid={prefix("btn-google")}

@@ -5,9 +5,8 @@ import { Formik } from "formik";
 import { validationSchema, initialValues } from "../../../utils/validation";
 
 import * as Layout from "../../Layout";
-import Dropzone, { fileTypes } from "../../Dropzone";
 import Button from "../../Button";
-import { FormInput, FormTextArea } from "../../Form";
+import { FormInput, FormTextArea, FormDropzone, fileTypes } from "../../Form";
 
 function PlaylistForm({ handleSubmit, isEditing, formError }) {
   const onSubmit = (values) => {
@@ -26,7 +25,7 @@ function PlaylistForm({ handleSubmit, isEditing, formError }) {
         <Layout.Container>
           <form onSubmit={formikProps.handleSubmit}>
             <Layout.Column>
-              <Layout.Flex>
+              <Layout.Flex width="full" height="auto">
                 <Layout.Row justify="start" align="start">
                   {/* <Layout.Flex
                     justify="center"
@@ -43,7 +42,7 @@ function PlaylistForm({ handleSubmit, isEditing, formError }) {
                       onFileSelected={formikProps.handleChange}
                     />
                   </Layout.Flex> */}
-                  <Layout.Column fullWidth growValue={2} classes={[""]}>
+                  <Layout.Column fullWidth classes={[""]}>
                     <FormInput
                       darkMode
                       type="text"
@@ -81,7 +80,9 @@ function PlaylistForm({ handleSubmit, isEditing, formError }) {
                 </Layout.Row>
               </Layout.Flex>
               <Layout.Container classes={["mt-2"]}>
-                <Button type="submit">{isEditing ? "SAVE" : "CREATE"}</Button>
+                <Button roundedBorders type="submit">
+                  {isEditing ? "SAVE" : "CREATE"}
+                </Button>
               </Layout.Container>
             </Layout.Column>
           </form>

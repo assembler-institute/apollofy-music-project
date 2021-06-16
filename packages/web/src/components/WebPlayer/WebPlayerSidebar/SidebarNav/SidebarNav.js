@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import "./SidebarNav.scss";
 
 import Logo from "../../../Logo/Logo";
-import NavHomeButton from "./NavHomeButton";
-import NavSearchButton from "./NavSearchButton";
-import NavLibraryButton from "./NavLibraryButton";
+import SidebarItem from "../SidebarItem";
+import { HomeIcon, LibraryIcon, SearchIcon } from "../../../Icons";
 import * as ROUTES from "../../../../routes";
 
 function SidebarNav() {
@@ -18,22 +17,22 @@ function SidebarNav() {
       <ul className="SidebarNav__list">
         <li className="SidebarNav__list-item" aria-label="home">
           <Link to={ROUTES.WEB_PLAYER_HOME}>
-            <NavHomeButton>Home</NavHomeButton>
+            <SidebarItem icon={HomeIcon}>Home</SidebarItem>
           </Link>
         </li>
         <li className="SidebarNav__list-item" aria-label="search">
           <Link to={ROUTES.WEB_PLAYER_SEARCH}>
-            <NavSearchButton>Search</NavSearchButton>
+            <SidebarItem icon={SearchIcon}>Search</SidebarItem>
           </Link>
         </li>
         <li className="SidebarNav__list-item" aria-label="your library">
           <Link to={ROUTES.WEB_PLAYER_LIBRARY}>
-            <NavLibraryButton>Your library</NavLibraryButton>
+            <SidebarItem icon={LibraryIcon}>Your library</SidebarItem>
           </Link>
         </li>
         <li className="SidebarNav__list-item" aria-label="statistics">
           <Link to={ROUTES.WEB_PLAYER_STATS}>
-            <NavLibraryButton>Statistics</NavLibraryButton>
+            <SidebarItem icon={LibraryIcon}>Statistics</SidebarItem>
           </Link>
         </li>
       </ul>
