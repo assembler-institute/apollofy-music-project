@@ -22,11 +22,13 @@ export const validationSchema = {
   /*     .with("description", "title")
     .with("filePath", "title"), */
 
-  songForm: Yup.object({
+  trackForm: Yup.object({
     title: Yup.string().required("Song title is required"),
     artists: Yup.array().of(Yup.string()).required("Song artists are required"),
-    genres: Yup.array().of(Yup.string()),
-    coverPath: Yup.string().nullable(),
+    genre: Yup.string().required(),
+    trackFile: Yup.string().required(),
+    thumbnailFile: Yup.string().nullable(),
+    thumbnailUrl: Yup.string().default(""),
   }),
 };
 
@@ -44,10 +46,12 @@ export const initialValues = {
     filePath: "",
     thumbnail: "",
   },
-  songForm: {
+  trackForm: {
     title: "",
     artists: [],
-    genres: [],
-    coverPath: null,
+    genre: "",
+    trackFile: null,
+    thumbnailFile: null,
+    thumbnailUrl: "",
   },
 };

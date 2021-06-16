@@ -24,16 +24,16 @@ export function fetchGenres() {
     dispatch(genresRequest());
     const res = await api.getGenres();
 
-    if (res.isSuccessful) {
-      const normalizedGenres = normalizeGenres(res.data);
-      dispatch(
-        genresSuccess({
-          byID: normalizedGenres.entities.genres,
-          ids: normalizedGenres.result,
-        }),
-      );
-    } else {
-      dispatch(genresError(res.errorMessage));
+    if (res.errorMessage) {
+      return dispatch(genresError(res.errorMessage));
     }
+
+    const normalizedGenres = normalizeGenres(res.data.data);
+    return dispatch(
+      genresSuccess({
+        byID: normalizedGenres.entities.genres,
+        ids: normalizedGenres.result,
+      }),
+    );
   };
 }

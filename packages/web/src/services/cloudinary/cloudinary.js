@@ -10,7 +10,7 @@ export const getFileUrl = ({ file, fileType, onUploadProgress }) => {
   const imageUploadPreset =
     process.env.REACT_APP_CLOUDINARY_IMAGE_UPLOAD_PRESET;
   const unsignedCloudName = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
-
+  const apiKey = process.env.REACT_APP_CLOUDINARY_API_KEY;
   const url = `https://api.cloudinary.com/v1_1/${unsignedCloudName}/upload`;
 
   const formData = new FormData();
@@ -21,8 +21,10 @@ export const getFileUrl = ({ file, fileType, onUploadProgress }) => {
   fileType === fileTypes.AUDIO
     ? formData.append("resource_type", "video")
     : formData.append("resource_type", "image");
-  formData.append("public_id", file.name);
+  formData.append("api_key", apiKey);
   formData.append("tags", "browser_upload");
+  formData.append("cloud_name", unsignedCloudName);
+  formData.append("public_id", file.name);
 
   const config = {
     headers: {
@@ -32,6 +34,7 @@ export const getFileUrl = ({ file, fileType, onUploadProgress }) => {
     // eslint-disable-next-line func-names
     onUploadProgress: onUploadProgress,
   };
-
-  return axios.post(url, formData, config);
+  const client = axios.create();
+  delete client.defaults.headers.common.Authorization;
+  return client.post(url, formData, config);
 };
