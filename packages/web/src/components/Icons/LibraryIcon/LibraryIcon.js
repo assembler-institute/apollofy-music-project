@@ -5,7 +5,7 @@ import cn from "clsx";
 function LibraryIcon({ active, stroke }) {
   const classes = cn({
     [`SidebarNav__btn-icon`]: true,
-    [`SidebarNav__btn-icon--active`]: active,
+    [`SidebarNav__btn-icon--active`]: active && !stroke,
     [`SidebarNav__btn-icon--stroke`]: active && stroke,
   });
 
@@ -50,7 +50,7 @@ LibraryIcon.propTypes = {
 };
 
 LibraryIcon.defaultProps = {
-  active: false,
+  active: true,
   stroke: false,
 };
 

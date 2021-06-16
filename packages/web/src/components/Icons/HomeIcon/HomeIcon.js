@@ -2,10 +2,10 @@ import React from "react";
 import { bool } from "prop-types";
 import cn from "clsx";
 
-function SearchIcon({ active, stroke }) {
-  const svgClasses = cn({
+function HomeIcon({ active, stroke }) {
+  const classes = cn({
     [`SidebarNav__btn-icon`]: true,
-    [`SidebarNav__btn-icon--active`]: active,
+    [`SidebarNav__btn-icon--active`]: active && !stroke,
     [`SidebarNav__btn-icon--stroke`]: active && stroke,
   });
 
@@ -17,14 +17,10 @@ function SearchIcon({ active, stroke }) {
           viewBox="0 0 20 20"
           width="24"
           fill="currentColor"
-          className={svgClasses}
+          className={classes}
           aria-hidden
         >
-          <path
-            fillRule="evenodd"
-            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-            clipRule="evenodd"
-          />
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
         </svg>
       ) : (
         <svg
@@ -33,14 +29,14 @@ function SearchIcon({ active, stroke }) {
           viewBox="0 0 24 24"
           width="24"
           stroke="currentColor"
-          className={svgClasses}
+          className={classes}
           aria-hidden
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
           />
         </svg>
       )}
@@ -48,14 +44,14 @@ function SearchIcon({ active, stroke }) {
   );
 }
 
-SearchIcon.propTypes = {
+HomeIcon.propTypes = {
   active: bool,
   stroke: bool,
 };
 
-SearchIcon.defaultProps = {
-  active: false,
+HomeIcon.defaultProps = {
+  active: true,
   stroke: false,
 };
 
-export default SearchIcon;
+export default HomeIcon;
