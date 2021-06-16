@@ -29,12 +29,14 @@ function CustomModal({
       className="Modal"
       isOpen={isOpen}
       onRequestClose={onClose}
-      overlayClassName="Overlay"
+      overlayClassName="myoverlay"
     >
       <div className="Modal__content">
         <div className="Modal__header">
           {title && <h1 className={titleStyle}>{title}</h1>}
-          <Button handleClick={onClose}>Close</Button>
+          <Button roundedBorders handleClick={onClose}>
+            Close
+          </Button>
         </div>
         <div className="Modal__body">{children}</div>
       </div>
