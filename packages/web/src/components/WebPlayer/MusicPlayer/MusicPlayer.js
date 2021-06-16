@@ -9,7 +9,7 @@ function MusicPlayer() {
     <Container
       fullSize
       bg="dark"
-      padding={4}
+      padding="4"
       roundedBorders
       aria-label="player controls"
     >

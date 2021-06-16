@@ -3,6 +3,8 @@ import { node, string, arrayOf, number, oneOf } from "prop-types";
 import cn from "clsx";
 
 function Flex({
+  width,
+  height,
   direction,
   wrap,
   grow,
@@ -15,7 +17,10 @@ function Flex({
 }) {
   const flexStyle = cn(
     {
-      [`w-full h-full`]: true,
+      [`w-auto h-auto`]: !width && !height,
+      [`w-${width} h-full`]: width && !height,
+      [`w-full h-${height}`]: !width && height,
+      [`w-${width} h-${height}`]: width && height,
       [`flex flex-${direction} flex-${wrap}`]: true,
       [`items-${align} justify-${justify}`]: align && justify,
       [`rounded-md`]: true,
@@ -32,6 +37,8 @@ function Flex({
 }
 
 Flex.propTypes = {
+  width: string,
+  height: string,
   direction: oneOf(["row", "col"]),
   wrap: oneOf(["wrap", "wrap-reverse", "nowrap"]),
   grow: number,
@@ -43,6 +50,8 @@ Flex.propTypes = {
 };
 
 Flex.defaultProps = {
+  width: null,
+  height: null,
   direction: "row",
   wrap: "wrap",
   align: null,

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Dropzone from "../../components/Dropzone";
+import { FormDropzone } from "../../components/Form";
 
 import "./UploadImage.scss";
 
@@ -30,7 +30,7 @@ function UploadImage() {
     <div className="h-full p-4">
       <div className="h-full w-full flex flex-col justify-center items-center">
         <h4>Upload Image File</h4>
-        <Dropzone
+        <FormDropzone
           fileType={fileTypes.IMAGE}
           onFileSelected={(files) => {
             // eslint-disable-next-line no-console

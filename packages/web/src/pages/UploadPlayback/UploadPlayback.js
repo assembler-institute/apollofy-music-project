@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./UploadPlayback.scss";
 
-import Select from "../../components/Select";
+import { FormSelect } from "../../components/Form";
 import { authSelector } from "../../redux/auth/auth-selectors";
 
 import { fetchAllTracks, playTrack } from "../../redux/track/track-actions";
@@ -18,9 +18,6 @@ function UploadPlayback() {
   const dispatch = useDispatch();
 
   const [trackId, setTrackId] = useState();
-
-  // eslint-disable-next-line no-unused-vars
-  const { isAuthenticated } = useSelector(authSelector);
 
   const {
     byID,
@@ -74,10 +71,15 @@ function UploadPlayback() {
         <div className="p-4 bg-light rounded-md flex flex-col justify-center items-center">
           <h1 className="text-2xl text-dark font-bold mb-4">Play Track</h1>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="title" className="form-label text-dark">
-              Track
-            </label>
-            <Select id="title" options={tracks} handleChange={handleSetTrack} />
+            <FormSelect
+              id="track-title"
+              name="track-title"
+              labelTitle="Track"
+              placeholder="Select a track"
+              options={tracks}
+              value={byID[trackId]}
+              handleChange={handleSetTrack}
+            />
             <button className="btn btn-primary w-full" type="submit">
               Play
             </button>

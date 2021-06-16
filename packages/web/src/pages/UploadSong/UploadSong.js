@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Dropzone from "../../components/Dropzone";
+import { FormDropzone } from "../../components/Form";
 
 import "./UploadSong.scss";
 
@@ -57,8 +57,10 @@ function UploadSong() {
               value={title}
               onChange={handleSetTitle}
             />
-            <Dropzone
+            <FormDropzone
               fileType={fileTypes.AUDIO}
+              darkMode
+              hintText="Drag n drop any file here, or click to select"
               onFileSelected={(files) => {
                 // eslint-disable-next-line no-console
                 handleSetFile(files[0]);
@@ -66,7 +68,7 @@ function UploadSong() {
             />
 
             <button
-              className="btn btn-primary w-full"
+              className="btn btn-primary w-full mt-2"
               type="submit"
               disabled={isUploadingSong}
             >
