@@ -39,7 +39,7 @@ function Home() {
     <>
       <BasePageLayout>
         <Container width="4/6" margin="auto">
-          <Flex justify="center" align="center" height="auto">
+          <Flex justify="center" align="center" height="full">
             <Column fullWidth justify="center" align="center">
               <Container>
                 <h1 className="uppercase font-bold text-3xl">Apollofy</h1>
@@ -55,10 +55,14 @@ function Home() {
               </Container>
               <Container classes={["mt-12"]}>
                 <Flex align="center" justify="center">
-                  <Grid gap={4} cols={2} rows={gridRows}>
+                  <Grid gap="4" cols={2} rows={gridRows}>
                     <div classes={[""]}>
                       <Link to={ROUTES.WEB_PLAYER_HOME}>
-                        <Button classes={["w-full"]} type="button">
+                        <Button
+                          roundedBorders
+                          classes={["w-full"]}
+                          type="button"
+                        >
                           WebPlayer
                         </Button>
                       </Link>
@@ -66,7 +70,11 @@ function Home() {
 
                     <div classes={[]}>
                       <Link to={ROUTES.UPLOAD_PLAYBACK}>
-                        <Button classes={["w-full"]} type="button">
+                        <Button
+                          roundedBorders
+                          classes={["w-full"]}
+                          type="button"
+                        >
                           Upload Playback
                         </Button>
                       </Link>
@@ -75,14 +83,22 @@ function Home() {
                       <>
                         <div>
                           <Link to={ROUTES.LOGIN}>
-                            <Button classes={["w-full"]} type="button">
+                            <Button
+                              roundedBorders
+                              classes={["w-full"]}
+                              type="button"
+                            >
                               Login
                             </Button>
                           </Link>
                         </div>
                         <div>
                           <Link to={ROUTES.SIGN_UP}>
-                            <Button classes={["w-full"]} type="button">
+                            <Button
+                              roundedBorders
+                              classes={["w-full"]}
+                              type="button"
+                            >
                               Sign up
                             </Button>
                           </Link>
@@ -92,6 +108,7 @@ function Home() {
                     {isAuthenticated && (
                       <div>
                         <Button
+                          roundedBorders
                           classes={["w-full"]}
                           type="button"
                           onClick={handleSignOut}
@@ -103,7 +120,11 @@ function Home() {
 
                     <div classes={[""]}>
                       <Link to={ROUTES.RESET_PASSWORD}>
-                        <Button classes={["w-full"]} type="button">
+                        <Button
+                          roundedBorders
+                          classes={["w-full"]}
+                          type="button"
+                        >
                           Reset password
                         </Button>
                       </Link>

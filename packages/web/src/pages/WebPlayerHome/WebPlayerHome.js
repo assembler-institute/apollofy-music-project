@@ -20,12 +20,9 @@ import { fetchAllPlaylists } from "../../redux/playlist/playlist-actions";
 import CardPanel from "../../components/CardPanel";
 import Card from "../../components/Card";
 
-import { PlaylistCreateModal } from "../../components/Modals";
-
 function WebPlayerHome(props) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [modalOpen, setModalOpen] = useState(false);
   const {
     byID,
     ids,
@@ -72,15 +69,6 @@ function WebPlayerHome(props) {
     <WebPlayer>
       <Column>
         <h1>Home</h1>
-        <br />
-        <button type="button" onClick={() => setModalOpen(true)}>
-          Open Modal
-        </button>
-        <PlaylistCreateModal
-          isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-        />
-
         <br />
         {playlistsLoading && <h4>Playlist Loading</h4>}
         {playlistsLoadingError && <h4>Playlist Loading Error</h4>}

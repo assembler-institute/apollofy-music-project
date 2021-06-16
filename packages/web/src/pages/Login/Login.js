@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
@@ -6,10 +6,9 @@ import "./Login.scss";
 
 import BasePageLayout from "../../components/BasePageLayout";
 import { LoginForm } from "../../components/Forms";
-import Header from "../../components/Header";
 import * as ROUTES from "../../routes";
 
-import { Container, Column, Row, Flex } from "../../components/Layout";
+import { Container, Row, Flex } from "../../components/Layout";
 
 import ClickSVG from "../../assets/images/undraw_boy_click.svg";
 
@@ -54,15 +53,16 @@ function Login() {
             <Row>
               <Container>
                 <Flex
-                  algin="center"
+                  align="center"
                   justify="center"
                   classes={["max-w-lg max-h-lg"]}
                 >
                   <img alt="svg" src={ClickSVG} />
                 </Flex>
               </Container>
-              <Container padding={12} classes={["mt-12"]}>
+              <Container padding="12" classes={["mt-12"]}>
                 <LoginForm
+                  id="loginForm"
                   onSubmit={handleSubmit}
                   loginWithGoogle={handleLoginWithGoogle}
                   loginError=""

@@ -24,7 +24,7 @@ function WebPlayer({ children, ...props }) {
 
   return (
     <BasePageLayout>
-      <Container fullSize padding={4}>
+      <Container fullSize padding="4">
         <Column fullWidth>
           <Container fullSize>
             <Row fullHeight>
